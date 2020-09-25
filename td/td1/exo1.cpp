@@ -57,6 +57,8 @@ void exo1Part2()
   {
     std::cout << tab2[i] << std::endl;
   }
+
+  delete[] tab2;
 }
 
 void exo1()
