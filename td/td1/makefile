@@ -42,5 +42,26 @@ clean3 :
 
 ############################
 
+exo4 : compile4
+	./exo4
+
+compile4 : exo4.o Point.o
+	g++ exo4.o Point.o -o exo4
+
+exo4.o : exo4.cpp
+	g++ -c exo4.cpp
+
+Point.o : Point.cpp Point.hpp
+	g++ -c Point.cpp
+
+clean4 :
+	rm exo4.o
+	rm Point.o
+
+############################
+
 cleanGlobal :
-	rm test	 exo1 exo2 exo3
+	clean1
+	clean2
+	clean3
+	clean4
