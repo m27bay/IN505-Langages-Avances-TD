@@ -28,7 +28,7 @@ class CString
 
     /* Methods */
     /* */
-    void print();
+    void print() const;
 
     /* */
     int nbrStr();
@@ -36,9 +36,9 @@ class CString
     /* */
     char* concat(const char car);
     CString concat2(const char car);
-    bool moreBigThan(const char* _str);
-    bool lessOrEqual(const char* _str);
-    char* moreBig(const char* _str);
+    bool moreBigThan(char* _str);
+    bool lessOrEqual(char* _str);
+    char* moreBig(char* _str);
 };
 
 #endif

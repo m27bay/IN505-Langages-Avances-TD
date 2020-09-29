@@ -65,7 +65,7 @@ void CString::setStr(char* newStr)
 /* End setter */
 
 /* Methods */
-void CString::print()
+void CString::print() const
 {
     if( size )
     {
@@ -92,13 +92,40 @@ char* CString::concat(const char car)
     newStr[ size+1 ] = '\0';
 
     /* */
-    std::cout << "newStd : " << newStr << std::endl;
     return newStr;
 
 }
 
 CString CString::concat2(const char car)
 {
-    return CString();
+    char* newStr = new char[ size+2 ];
+    strcpy( newStr, str );
+    newStr[ size ] = car;
+    newStr[ size+1 ] = '\0';
+
+    /* */
+    return CString(newStr);
+}
+
+bool CString::moreBigThan(char* _str)
+{
+    return ( strcmp(str, _str) > 0 );
+}
+
+bool CString::lessOrEqual(char* _str)
+{
+    return ( strcmp(str, _str) <= 0 );
+}
+
+char* CString::moreBig(char* _str)
+{
+    if( strcmp(str, _str) > 0 )
+    {
+        return str;
+    }
+    else
+    {
+        return _str;
+    }
 }
 /* End methods */
