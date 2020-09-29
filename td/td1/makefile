@@ -51,17 +51,36 @@ compile4 : exo4.o Point.o
 exo4.o : exo4.cpp
 	g++ -c exo4.cpp
 
-Point.o : Point.cpp Point.hpp
-	g++ -c Point.cpp
-
 clean4 :
 	rm exo4.o
 	rm Point.o
 
 ############################
 
-cleanGlobal :
+exo5 : compile5
+	./exo5
+
+compile5 : exo5.o Segment.o Point.o
+	g++ exo5.o Segment.o Point.o -o exo5
+
+exo5.o : exo5.cpp
+	g++ -c exo5.cpp
+
+Segment.o : Segment.cpp Segment.hpp
+	g++ -c Segment.cpp
+
+Point.o : Point.cpp Point.hpp
+	g++ -c Point.cpp
+
+clean5 :
+	rm exo5.o
+	rm Segment.o
+
+############################
+
+cleanAll :
 	clean1
 	clean2
 	clean3
 	clean4
+	clean5

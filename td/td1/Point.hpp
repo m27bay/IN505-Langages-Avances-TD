@@ -5,9 +5,14 @@
 
 class Point
 {
+  private :
+
+    /* Attributes */
+    int x, y;
+
   public :
 
-    /* Builder */
+    /* Builders */
     Point();
     Point(int Px, int Py);
     Point(const Point &P);
@@ -22,11 +27,6 @@ class Point
     /* Methods */
     void print();
     void clone(const Point &P);
-
-  private :
-
-    /* Attributes */
-    int x, y;
 };
 
 #endif
