@@ -78,6 +78,24 @@ clean5 :
 
 ############################
 
+exo6 : compile6
+	./exo6
+
+compile6 : exo6.o CString.o
+	g++ exo6.o CString.o -o exo6
+
+CString.o : CString.cpp CString.hpp
+	g++ -c -Wall CString.cpp
+
+exo6.o : exo6.cpp
+	g++ -c -Wall exo6.cpp
+
+clean6 :
+	rm exo6.o
+	rm CString.o
+
+############################
+
 cleanAll :
 	clean1
 	clean2
