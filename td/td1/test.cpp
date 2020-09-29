@@ -44,17 +44,21 @@ void firstManipVar()
   std::cout << a << "+" << b << " = " << res << std::endl;
 }
 
-void exo4()
+void test()
 {
-
+  char* str = new char[1];
+  str[0] = '\0';
+  delete[] str;
 }
 
 /* End functions */
 
 int main(int argc, char const *argv[])
 {
-  printHelloWorld();
-  firstManipVar();
+  // printHelloWorld();
+  // firstManipVar();
+
+  test();
 
   return 0;
 }

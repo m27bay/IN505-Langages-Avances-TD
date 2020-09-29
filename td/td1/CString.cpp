@@ -8,9 +8,10 @@ int CString::_nbrStr = 0;
 CString::CString(const char* _str)
 {
     /* */
-    str = new char[ size=strlen(_str) + 1 ];
+    size=strlen(_str);
+    str = new char[ size + 1 ];
     strcpy(str, _str);
-    str[ size - 1 ] = '\0';
+    str[ size ] = '\0';
 
     /* */
     _nbrStr++;
@@ -19,9 +20,10 @@ CString::CString(const char* _str)
 CString::CString(const char car)
 {
     /* */
-    str = new char[ size=2 ];
+    size = 1;
+    str = new char[2];
     str[0] = car;
-    str[ 1 ] = '\0';
+    str[1] = '\0';
 
     /* */
     _nbrStr++;
@@ -30,7 +32,8 @@ CString::CString(const char car)
 CString::CString()
 {
     /* */
-    str = new char[ size=1 ];
+    size = 0;
+    str = new char[1];
     str[0] = '\0';
 
     /* */
@@ -42,8 +45,8 @@ CString::CString()
 CString::~CString()
 {
     std::cout << "destructor" << std::endl;
-    delete[] str;
     _nbrStr--;
+    delete[] str;
 }
 /* End destructor */
 
@@ -54,10 +57,24 @@ char* CString::getStr()
 }
 /* End getter */
 
+/* Setter */
+void CString::setStr(char* newStr)
+{
+    str = newStr;
+}
+/* End setter */
+
 /* Methods */
 void CString::print()
 {
-    std::cout << str << std::endl;
+    if( size )
+    {
+        std::cout << str << std::endl;
+    }
+    else
+    {
+        std::cout << "*empyt*" << std::endl;
+    }
 }
 
 /* */
@@ -67,16 +84,21 @@ int CString::nbrStr()
 }
 
 /* */
-CString CString::concat(const char car)
+char* CString::concat(const char car)
 {
-    std::cout << "hello world" << std::endl;
-    // char* newStr = new char[ size+2 ];
-    // strcpy( newStr, str );
-    // newStr[ size ] = car;
-    // newStr[ size+1 ] = '\0';
+    char* newStr = new char[ size+2 ];
+    strcpy( newStr, str );
+    newStr[ size ] = car;
+    newStr[ size+1 ] = '\0';
 
-    // /* */
-    return CString( "hello world" );
+    /* */
+    std::cout << "newStd : " << newStr << std::endl;
+    return newStr;
 
+}
+
+CString CString::concat2(const char car)
+{
+    return CString();
 }
 /* End methods */

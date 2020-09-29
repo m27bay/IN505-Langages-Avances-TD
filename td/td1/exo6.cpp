@@ -14,8 +14,11 @@ int main(int argc, char const *argv[])
   // /* Print the number of strings */
   std::cout << "Number of strings : " << s1.nbrStr() << std::endl;
 
-  s3 = s1.concat('w');
-  // std::cout << "s3 = " << s3.getStr() << std::endl;
+  // s3 = s1.concat('w');
+  s3.setStr( s1.concat('w') );
+  std::cout << "s3 = " << s3.getStr() << std::endl;
+  s3.setStr( s3.concat('w') );
+  std::cout << "s3 = " << s3.getStr() << std::endl;
 
   return 0;
 }

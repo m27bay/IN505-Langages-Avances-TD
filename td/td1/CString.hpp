@@ -23,6 +23,9 @@ class CString
     /* Getter */
     char* getStr();
 
+    /* Setter */
+    void setStr(char* newStr);
+
     /* Methods */
     /* */
     void print();
@@ -31,7 +34,8 @@ class CString
     int nbrStr();
 
     /* */
-    CString concat(const char car);
+    char* concat(const char car);
+    CString concat2(const char car);
     bool moreBigThan(const char* _str);
     bool lessOrEqual(const char* _str);
     char* moreBig(const char* _str);
