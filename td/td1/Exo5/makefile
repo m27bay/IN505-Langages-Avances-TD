@@ -1,17 +1,18 @@
 all : compile
-	./../exe/exo5
+	./../Exe/exo5
 
 compile : exo5.o Segment.o
-	g++ ../obj/exo5.o ../obj/Segment.o ../obj/Point.o -o ../exe/exo5
+	g++ ../Obj/exo5.o ../Obj/Segment.o ../Obj/Point.o -o ../Exe/exo5
 
 exo5.o : exo5.cpp
 	g++ -c exo5.cpp
-	mv exo5.o ../obj
+	mv exo5.o ../Obj
 
 Segment.o : Segment.cpp Segment.hpp
 	g++ -c Segment.cpp
-	mv Segment.o ../obj
+	mv Segment.o ../Obj
 
 clean :
-	rm ../obj/exo5.o
-	rm ../obj/Segment.o
+	rm ../Exe/exo5
+	rm ../Obj/exo5.o
+	rm ../Obj/Segment.o
