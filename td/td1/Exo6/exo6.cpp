@@ -22,8 +22,8 @@ int main(int argc, char const *argv[])
   s3.setStr( s3.cstradd('w') );
   std::cout << "s3 = " << s3.getStr() << std::endl;
 
-  // s3 = s1.concat2('w');
-  // std::cout << "s3 = " << s3.getStr() << std::endl;
+  s3 = s1.cstradd2('w');
+  std::cout << "s3 = " << s3.getStr() << std::endl;
 
   std::cout << "s3 > s2 ? " << s3.moreBigThan( s2.getStr() ) << std::endl;
   std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
