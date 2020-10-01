@@ -1,9 +1,9 @@
 all : compile
-	./exo3
+	./../exe/exo3
 
 compile :
-	g++ exo3.cpp -o exo3
+	g++ exo3.cpp -o ../exe/exo3
 
 clean :
-	rm exo3
+	rm ../exe/exo3
 

@@ -1,7 +1,7 @@
 #ifndef SEGMENT_HPP
 #define SEGMENT_HPP
 
-#include "Point.hpp"
+#include "../Exo4/Point.hpp"
 
 class Segment
 {

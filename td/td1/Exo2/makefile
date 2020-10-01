@@ -1,8 +1,8 @@
 all : compile
-	./exo2
+	./../exe/exo2
 
 compile :
-	g++ exo2.cpp -o exo2
+	g++ exo2.cpp -o ../exe/exo2
 
 clean :
-	rm exo2
+	rm ../exe/exo2

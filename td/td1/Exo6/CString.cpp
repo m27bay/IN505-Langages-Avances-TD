@@ -4,6 +4,8 @@
 
 int CString::_nbrStr = 0;
 
+/* */
+
 /* builders */
 CString::CString(const char* _str)
 {
@@ -11,7 +13,6 @@ CString::CString(const char* _str)
     size=strlen(_str);
     str = new char[ size + 1 ];
     strcpy(str, _str);
-    str[ size ] = '\0';
 
     /* */
     _nbrStr++;
@@ -34,7 +35,6 @@ CString::CString()
     /* */
     size = 0;
     str = new char[1];
-    str[0] = '\0';
 
     /* */
     _nbrStr++;
@@ -84,7 +84,7 @@ int CString::nbrStr()
 }
 
 /* */
-char* CString::concat(const char car)
+char* CString::cstradd(const char car)
 {
     char* newStr = new char[ size+2 ];
     strcpy( newStr, str );
@@ -96,15 +96,11 @@ char* CString::concat(const char car)
 
 }
 
-CString CString::concat2(const char car)
-{
-    char* newStr = new char[ size+2 ];
-    strcpy( newStr, str );
-    newStr[ size ] = car;
-    newStr[ size+1 ] = '\0';
-
-    /* */
-    return CString(newStr);
+CString CString::cstradd2(char car){
+    char* tmp = new char[ strlen( str ) + 1 ];
+    strcpy( tmp, str );
+    tmp[ strlen( str ) ] = car;
+    return CString(tmp);
 }
 
 bool CString::moreBigThan(char* _str)

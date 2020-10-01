@@ -34,8 +34,10 @@ class CString
     int nbrStr();
 
     /* */
-    char* concat(const char car);
-    CString concat2(const char car);
+    char* cstradd(const char car);
+    CString cstradd2(const char car);
+
+    /* */
     bool moreBigThan(char* _str);
     bool lessOrEqual(char* _str);
     char* moreBig(char* _str);

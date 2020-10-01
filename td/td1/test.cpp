@@ -51,6 +51,45 @@ void test()
   delete[] str;
 }
 
+int cstrlen(const char* str)
+{
+    if( str == NULL )
+    {
+        std::cout << "Error : null string" << std::endl;
+        return -1;
+    }
+    int len = 0;
+    while( str[len] != '\0' )
+    {
+        len++;
+    }
+    return len;
+}
+
+void cstrcpy(char* dest, const char* src)
+{
+    if( dest == NULL || src == NULL )
+    {
+        std::cout << "Error : null string" << std::endl;
+    }
+    dest = new char[ cstrlen(src) ];
+    for( int i = 0; i <cstrlen(src); i++)
+    {
+        dest[i] = src[i];
+    }
+}
+
+void test2()
+{
+  const char* str = "bonjour";
+  int sizeStr = cstrlen(str);
+  std::cout << sizeStr << std::endl;
+
+  char* str2 = new char[sizeStr + cstrlen("ToutLeMonde")];
+  cstrcpy(str, "ToutLeMonde");
+  std::cout << str2 << std::endl;
+}
+
 /* End functions */
 
 int main(int argc, char const *argv[])
@@ -58,7 +97,8 @@ int main(int argc, char const *argv[])
   // printHelloWorld();
   // firstManipVar();
 
-  test();
+  // test();
+  test2();
 
   return 0;
 }

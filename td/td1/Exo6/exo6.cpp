@@ -17,12 +17,11 @@ int main(int argc, char const *argv[])
   // /* Print the number of strings */
   std::cout << "Number of strings : " << s1.nbrStr() << std::endl;
 
-  s3.setStr( s1.concat('w') );
+  s3.setStr( s1.cstradd('w') );
   std::cout << "s3 = " << s3.getStr() << std::endl;
-  s3.setStr( s3.concat('w') );
+  s3.setStr( s3.cstradd('w') );
   std::cout << "s3 = " << s3.getStr() << std::endl;
 
-  // Seg fault but why ?
   // s3 = s1.concat2('w');
   // std::cout << "s3 = " << s3.getStr() << std::endl;
 
