@@ -1,5 +1,5 @@
 #include "CString.hpp"
-#include <cstring>
+#include <string.h>
 #include <iostream>
 
 int CString::_nbrStr = 0;
@@ -10,7 +10,8 @@ int CString::_nbrStr = 0;
 CString::CString(const char* _str)
 {
     /* */
-    size=strlen(_str);
+    size = strlen(_str);
+    str = NULL;
     str = new char[ size + 1 ];
     strcpy(str, _str);
 
@@ -22,6 +23,7 @@ CString::CString(const char car)
 {
     /* */
     size = 1;
+    str = NULL;
     str = new char[2];
     str[0] = car;
     str[1] = '\0';
@@ -34,7 +36,7 @@ CString::CString()
 {
     /* */
     size = 0;
-    str = new char[1];
+    str = NULL;
 
     /* */
     _nbrStr++;
@@ -46,6 +48,7 @@ CString::~CString()
 {
     std::cout << "destructor" << std::endl;
     _nbrStr--;
+    size = 0;
     delete[] str;
 }
 /* End destructor */
@@ -69,7 +72,7 @@ void CString::print() const
 {
     if( size )
     {
-        std::cout << str << std::endl;
+        std::cout << "String : " << str << ", size : " << size <<std::endl;
     }
     else
     {
@@ -83,24 +86,19 @@ int CString::nbrStr()
     return _nbrStr;
 }
 
-/* */
-char* CString::cstradd(const char car)
+CString CString::cstradd(char car)
 {
-    char* newStr = new char[ size+2 ];
-    strcpy( newStr, str );
-    newStr[ size ] = car;
-    newStr[ size+1 ] = '\0';
+    /* */
+    int newSize = size + 2;
+    char* tmp = new char[ newSize ];
+    strcpy( tmp, str );
+    tmp[ size ] = car;
+    tmp[ newSize - 1 ] = '\0';
 
     /* */
-    return newStr;
-
-}
-
-CString CString::cstradd2(char car){
-    char* tmp = new char[ strlen( str ) + 1 ];
-    strcpy( tmp, str );
-    tmp[ strlen( str ) ] = car;
-    return CString(tmp);
+    CString CStmp = CString(tmp);
+    CStmp.print();
+    return CStmp;
 }
 
 bool CString::moreBigThan(char* _str)
