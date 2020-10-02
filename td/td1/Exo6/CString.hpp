@@ -13,15 +13,17 @@ class CString
   public :
 
     /* Builders */
-    CString(const char* _str);
-    CString(const char car);
     CString();
+    CString(const char car);
+    CString(const char* _str);
+    CString(const CString &cstr);
 
     /* Destructor */
     ~CString();
 
     /* Getter */
-    char* getStr();
+    char* getStr() const;
+    int getSize() const;
 
     /* Setter */
     void setStr(char* newStr);
@@ -34,9 +36,8 @@ class CString
     int nbrStr();
 
     /* */
+    void operator=(const CString &other);
     CString cstradd(const char car);
-
-    /* */
     bool moreBigThan(char* _str);
     bool lessOrEqual(char* _str);
     char* moreBig(char* _str);

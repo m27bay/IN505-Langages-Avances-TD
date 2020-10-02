@@ -7,13 +7,12 @@ int CString::_nbrStr = 0;
 /* */
 
 /* builders */
-CString::CString(const char* _str)
+CString::CString()
 {
+    std::cout << "CString : default builder" << std::endl;
     /* */
-    size = strlen(_str);
+    size = 0;
     str = NULL;
-    str = new char[ size + 1 ];
-    strcpy(str, _str);
 
     /* */
     _nbrStr++;
@@ -21,6 +20,7 @@ CString::CString(const char* _str)
 
 CString::CString(const char car)
 {
+    std::cout << "CString : builder with char" << std::endl;
     /* */
     size = 1;
     str = NULL;
@@ -32,31 +32,36 @@ CString::CString(const char car)
     _nbrStr++;
 }
 
-CString::CString()
+CString::CString(const char* _str)
 {
+    std::cout << "CString : builder with char*" << std::endl;
     /* */
-    size = 0;
+    size = strlen(_str);
     str = NULL;
+    str = new char[ size + 1 ];
+    strcpy(str, _str);
 
     /* */
     _nbrStr++;
 }
+
+CString::CString(const CString &cstr)
+{
+    std::cout << "CString : copy builder" << std::endl;
+    this->str = cstr.str;
+    this->size = cstr.size;
+}
 /* End builders */
 
-/* destructor */
-CString::~CString()
-{
-    std::cout << "destructor" << std::endl;
-    _nbrStr--;
-    size = 0;
-    delete[] str;
-}
-/* End destructor */
-
 /* Getter */
-char* CString::getStr()
+char* CString::getStr() const
 {
     return str;
+}
+
+int CString::getSize() const
+{
+    return size;
 }
 /* End getter */
 
@@ -68,6 +73,12 @@ void CString::setStr(char* newStr)
 /* End setter */
 
 /* Methods */
+void CString::operator=(const CString &other)
+{
+    str = other.getStr();
+    size = other.getSize();
+}
+
 void CString::print() const
 {
     if( size )
@@ -123,3 +134,12 @@ char* CString::moreBig(char* _str)
     }
 }
 /* End methods */
+
+/* destructor */
+CString::~CString()
+{
+    std::cout << "CString : destructor" << std::endl;
+    _nbrStr--;
+    delete[] str;
+}
+/* End destructor */
