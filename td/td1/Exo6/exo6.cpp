@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
   /* Init */
   CString s1("toto");
   CString s2('q');
-  CString s3 ;
+  CString s3; // Default builder
 
   CString str("Bonjour");
 

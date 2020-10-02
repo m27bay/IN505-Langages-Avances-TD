@@ -9,10 +9,10 @@ int CString::_nbrStr = 0;
 /* builders */
 CString::CString()
 {
-    std::cout << "CString : default builder" << std::endl;
     /* */
     size = 0;
-    str = NULL;
+    str = new char[1];
+    str[0] = '\0';
 
     /* */
     _nbrStr++;
@@ -20,7 +20,6 @@ CString::CString()
 
 CString::CString(const char car)
 {
-    std::cout << "CString : builder with char" << std::endl;
     /* */
     size = 1;
     str = NULL;
@@ -34,7 +33,6 @@ CString::CString(const char car)
 
 CString::CString(const char* _str)
 {
-    std::cout << "CString : builder with char*" << std::endl;
     /* */
     size = strlen(_str);
     str = NULL;
@@ -47,7 +45,6 @@ CString::CString(const char* _str)
 
 CString::CString(const CString &cstr)
 {
-    std::cout << "CString : copy builder" << std::endl;
     this->str = cstr.str;
     this->size = cstr.size;
 }
@@ -75,8 +72,10 @@ void CString::setStr(char* newStr)
 /* Methods */
 void CString::operator=(const CString &other)
 {
-    str = other.getStr();
-    size = other.getSize();
+    delete[] this->str;
+    this->str = new char[ strlen( other.getStr() ) + 1 ];
+    strcpy( this->str, other.getStr() );
+    this->size = other.getSize();
 }
 
 void CString::print() const
@@ -107,8 +106,7 @@ CString CString::cstradd(char car)
     tmp[ newSize - 1 ] = '\0';
 
     /* */
-    CString CStmp = CString(tmp);
-    CStmp.print();
+    CString CStmp(tmp);
     return CStmp;
 }
 
@@ -138,7 +136,6 @@ char* CString::moreBig(char* _str)
 /* destructor */
 CString::~CString()
 {
-    std::cout << "CString : destructor" << std::endl;
     _nbrStr--;
     delete[] str;
 }
