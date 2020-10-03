@@ -7,18 +7,21 @@ int main(int argc, char const *argv[])
   std::cout << "#########################" << std::endl;
 
   /* */
-  Definition def1; // Default builder
+  std::cout << "def1 : " << std::endl;
+  Definition def1; // Call default builder
   def1.print();
 
   /* */
+  std::cout << "def2 : " << std::endl;
   CString word("car");
   CString def("a road vehicle, [..].");
   Definition def2(word, def);
   def2.print();
 
   /* */
-  // Definition def3("car", "a road vehicle, [..].");
-  // def3.print();
+  std::cout << "def3 : " << std::endl;
+  Definition def3("car", "a road vehicle, [..].");
+  def3.print();
 
   return 0;
 }
