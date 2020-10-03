@@ -107,6 +107,7 @@ CString CString::cstradd(char car)
 
     /* */
     CString CStmp(tmp);
+    delete[] tmp;
     return CStmp;
 }
 

@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
 
   s3 = s1.cstradd('w');
   // std::cout << "s3 = " << s3.getStr() << std::endl;
-  // s3.print();
+  s3.print();
   // s3 = s2.cstradd('w');
   // s3.print();
 
@@ -33,9 +33,9 @@ int main(int argc, char const *argv[])
   // s3 = s1.cstradd('w');
   // s3.print();
 
-  // std::cout << "s3 > s2 ? " << s3.moreBigThan( s2.getStr() ) << std::endl;
-  // std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
-  // std::cout << "s3 > s2 ? " << s3.moreBig( s2.getStr() ) << std::endl;
+  std::cout << "s3 > s2 ? " << s3.moreBigThan( s2.getStr() ) << std::endl;
+  std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
+  std::cout << "s3 > s2 ? " << s3.moreBig( s2.getStr() ) << std::endl;
 
   return 0;
 }
