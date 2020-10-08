@@ -18,29 +18,28 @@ class CString
     CString(const char* _str);
     CString(const CString &cstr);
 
-    /* Destructor */
-    ~CString();
-
     /* Getter */
     char* getStr() const;
     int getSize() const;
+    int getNbrStr() const;
 
     /* Setter */
     void setStr(char* newStr);
 
-    /* Methods */
-    /* */
+    /* Print */
     void print() const;
 
-    /* */
-    int nbrStr();
+    /* Overloaded */
+    CString& operator=(const CString &other);
 
-    /* */
-    void operator=(const CString &other);
+    /* Methods */
     CString cstradd(const char car);
     bool moreBigThan(char* _str);
     bool lessOrEqual(char* _str);
     char* moreBig(char* _str);
+
+    /* Destructor */
+    ~CString();
 };
 
 #endif
