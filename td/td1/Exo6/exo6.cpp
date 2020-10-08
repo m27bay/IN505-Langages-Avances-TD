@@ -37,5 +37,9 @@ int main(int argc, char const *argv[])
   std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
   std::cout << "s3 > s2 ? " << s3.moreBig( s2.getStr() ) << std::endl;
 
+  CString s4 = str;
+  str.print();
+  s4.print();
+
   return 0;
 }
