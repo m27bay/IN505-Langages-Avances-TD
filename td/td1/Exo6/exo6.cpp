@@ -16,14 +16,14 @@ int main(int argc, char const *argv[])
   s2.print();
   s3.print();
 
-  str.print();
+  // str.print();
 
   /* Test methodes */
-  std::cout << "Number of strings : " << s1.nbrStr() << std::endl;
+  // std::cout << "Number of strings : " << s1.getNbrStr() << std::endl;
 
-  s3 = s1.cstradd('w');
+  // s3 = s1.cstradd('w');
   // std::cout << "s3 = " << s3.getStr() << std::endl;
-  s3.print();
+  // s3.print();
   // s3 = s2.cstradd('w');
   // s3.print();
 
@@ -33,9 +33,20 @@ int main(int argc, char const *argv[])
   // s3 = s1.cstradd('w');
   // s3.print();
 
-  std::cout << "s3 > s2 ? " << s3.moreBigThan( s2.getStr() ) << std::endl;
-  std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
-  std::cout << "s3 > s2 ? " << s3.moreBig( s2.getStr() ) << std::endl;
+  // std::cout << "s3 > s2 ? " << s3.moreBigThan( s2.getStr() ) << std::endl;
+  // std::cout << "s3 <= s2 ? " << s3.lessOrEqual( s2.getStr() ) << std::endl;
+  // std::cout << "s3 > s2 ? " << s3.moreBig( s2.getStr() ) << std::endl;
+
+  CString s5;
+  s5 = s1; // Use operator=
+  std::cout << "s5" << std::endl;
+  s5.print();
+
+  CString s4 = str; // Call copy constructor
+  std::cout << "str" << std::endl;
+  str.print();
+  std::cout << "s4" << std::endl;
+  s4.print();
 
   return 0;
 }
