@@ -1,24 +1,24 @@
 all : compile
-	./../Exe/exo6
+	./../Exe/exo1
 
-compile : exo6.o CString.o
-	g++ ../Obj/exo6.o ../Obj/CString.o -o ../Exe/exo6
+compile : exo1.o CString.o
+	g++ ../Obj/exo1.o ../Obj/CString.o -o ../Exe/exo1
 
 CString.o : CString.cpp CString.hpp
 	g++ -c -Wall CString.cpp
 	mv CString.o ../Obj
 
-exo6.o : exo6.cpp
-	g++ -c -Wall exo6.cpp
-	mv exo6.o ../Obj
+exo1.o : exo1.cpp
+	g++ -c -Wall exo1.cpp
+	mv exo1.o ../Obj
 
 vg :
-	valgrind ./../Exe/exo6
+	valgrind ./../Exe/exo1
 
 vg2 :
-	valgrind --leak-check=full ./../Exe/exo6
+	valgrind --leak-check=full ./../Exe/exo1
 
 clean :
-	rm ../Exe/exo6
-	rm ../Obj/exo6.o
+	rm ../Exe/exo1
+	rm ../Obj/exo1.o
 	rm ../Obj/CString.o

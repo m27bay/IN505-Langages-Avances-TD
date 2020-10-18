@@ -16,7 +16,7 @@ class CString
     CString();
     CString(const char car);
     CString(const char* _str);
-    CString(const CString &cstr);
+    CString(const CString&);
 
     /* Getter */
     char* getStr() const;
@@ -30,13 +30,17 @@ class CString
     void print() const;
 
     /* Overloaded */
-    void operator=(const CString &other);
-    CString& operator+(const CString &other);
+    void operator=(const CString&);
+
+    CString operator+(const CString&);
+
+    bool operator>(const CString&);
+    bool operator<=(const CString&);
 
 
     /* Methods */
     CString cstradd(const char car);
-    bool moreBigThan(char* _str);
+    bool moreBigThan(char*);
     bool lessOrEqual(char* _str);
     char* moreBig(char* _str);
 

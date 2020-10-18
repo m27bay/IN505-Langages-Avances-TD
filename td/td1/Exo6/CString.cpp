@@ -1,7 +1,6 @@
 #include "CString.hpp"
 #include <string.h>
 #include <iostream>
-#include <algorithm>
 
 int CString::_nbrStr = 0;
 
@@ -10,8 +9,7 @@ CString::CString()
 {
   /* */
   size = 0;
-  str = new char[1];
-  str[0] = '\0';
+  str = NULL;
 
   /* */
   _nbrStr++;
@@ -42,12 +40,10 @@ CString::CString(const char* _str)
   _nbrStr++;
 }
 
-// Copy constructor
 CString::CString(const CString &other)
 {
-  str = new char[ other.size + 1];
-  strcpy( str, other.str );
-  size = other.size;
+  this->str = new char[ (this->size = other.getSize()) + 1 ];
+  strcpy(this->str, other.str);
 }
 /* End builders */
 
@@ -62,11 +58,78 @@ int CString::getSize() const
   return size;
 }
 
-int CString::getNbrStr() const
+int CString::getNbrStr()
 {
   return _nbrStr;
 }
 /* End getter */
+
+/* Setter */
+void CString::setStr(char* newStr)
+{
+  str = newStr;
+}
+/* End setter */
+
+/* Overloaded */
+void CString::operator=(const CString &other)
+{
+  // delete[] this->str;
+  this->str = new char[ strlen( other.getStr() ) + 1 ];
+  strcpy( this->str, other.getStr() );
+  this->size = other.getSize();
+}
+
+// CString& CString::operator=(const CString &other)
+// {
+//   // // protect against invalid self-assignment
+//   if( this != &other )
+//   {
+//     // 1: allocate new memory and copy the elements
+//     char* newStr = new char[other.size + 1];
+//     std::copy(other.str, other.str + other.size, newStr);
+
+//     // 2: deallocate old memory
+//     delete[] str;
+
+//     // 3: assign the new memory to the object
+//     str = newStr;
+//     size = other.size;
+//   }
+
+//   // by convention, always return *this
+//   return *this;
+// }
+
+CString CString::operator+(const CString &other)
+{
+
+  // Alloc new memory
+  char* tmp = new char[(this->size += other.getSize()) + 1];
+
+  // Fill new string
+  strcpy(tmp, this->str);
+  strcat(tmp, other.getStr());
+
+  // Create new String
+  CString Ctmp(tmp);
+
+  // Free
+  delete[] tmp;
+
+  return Ctmp;
+}
+
+bool CString::operator>(const CString &other)
+{
+  return ( ( strcmp( this->str, other.getStr() ) > 0 ) && this->size > other.getSize() );
+}
+
+bool CString::operator<=(const CString &other)
+{
+  return ( ( strcmp( this->str, other.getStr() ) <= 0 ) && this->size <= other.getSize() );
+}
+/* End overloaded */
 
 /* Print */
 void CString::print() const
@@ -81,37 +144,7 @@ void CString::print() const
   }
 }
 
-/* Setter */
-void CString::setStr(char* newStr)
-{
-  str = newStr;
-}
-/* End setter */
-
-/* Overloaded */
-CString& CString::operator=(const CString &other)
-{
-  // // protect against invalid self-assignment
-  if( this != &other )
-  {
-    // 1: allocate new memory and copy the elements
-    char* newStr = new char[other.size + 1];
-    std::copy(other.str, other.str + other.size, newStr);
-
-    // 2: deallocate old memory
-    delete[] str;
-
-    // 3: assign the new memory to the object
-    str = newStr;
-    size = other.size;
-  }
-
-  // by convention, always return *this
-  return *this;
-}
-/* End overloaded */
-
-/* Methods */
+/* Methodes */
 CString CString::cstradd(char car)
 {
   /* */
@@ -153,7 +186,6 @@ char* CString::moreBig(char* _str)
 /* destructor */
 CString::~CString()
 {
-  std::cout << "destructor of " << str << std::endl;
   _nbrStr--;
   if( str != NULL )
   {
