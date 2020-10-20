@@ -12,6 +12,23 @@ exo2.o : exo2.cpp
 	g++ -c -Wall exo2.cpp
 	mv exo2.o ../Obj
 
+debug : compileD
+	./../Exe/exo2
+
+compileD : exo2.oD Vector.oD
+	g++ -g ../Obj/exo2.o ../Obj/Vector.o -o ../Exe/exo2
+
+Vector.oD : Vector.cpp Vector.hpp
+	g++ -c -g -Wall Vector.cpp
+	mv Vector.o ../Obj
+
+exo2.oD : exo2.cpp
+	g++ -c -g -Wall exo2.cpp
+	mv exo2.o ../Obj
+
+gdb :
+	gdb ./../Exe/exo2
+
 vg :
 	valgrind ./../Exe/exo2
 

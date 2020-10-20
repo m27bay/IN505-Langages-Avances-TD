@@ -12,6 +12,20 @@ exo1.o : exo1.cpp
 	g++ -c -Wall exo1.cpp
 	mv exo1.o ../Obj
 
+debug : compileD
+	./../Exe/exo1
+
+compileD : exo1.oD CString.oD
+	g++ -g ../Obj/exo1.o ../Obj/CString.o -o ../Exe/exo1
+
+CString.oD : CString.cpp CString.hpp
+	g++ -c -g -Wall CString.cpp
+	mv CString.o ../Obj
+
+exo1.oD : exo1.cpp
+	g++ -c -g -Wall exo1.cpp
+	mv exo1.o ../Obj
+
 vg :
 	valgrind ./../Exe/exo1
 

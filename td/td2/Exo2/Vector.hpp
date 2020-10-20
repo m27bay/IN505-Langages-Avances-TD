@@ -6,33 +6,44 @@ class Vector
   private :
 
     /* attributes */
-    int* vector;
-    int numComponents;
+    int* tab;
+    int size;
 
   public :
 
     /* Builders */
     Vector(); // Default
     Vector(const Vector&); // Copy
+    Vector(int* tab, int size);
     Vector(int size);
-    Vector(int* tab, int tabSize);
 
     /* Getter */
-    int* getVector() const;
-    int getNumComponents() const;
+    // Empty
 
     /* Setter */
+    void setTab(int*);
 
     /* Overloaded */
-    void operator=(const Vector&);
+    Vector &operator=(const Vector&);
 
     Vector operator+(const Vector&);
     Vector operator-(const Vector&);
 
+    Vector &operator+=(const Vector&);
+    Vector &operator-=(const Vector&);
+
     bool operator<(const Vector&);
+    bool operator<=(const Vector&);
     bool operator>(const Vector&);
+    bool operator>=(const Vector&);
+
+    int operator[](const int);
+
+    friend std::ostream &operator<<(std::ostream &flux, const Vector&);
+    friend std::istream &operator>>(std::istream &flux, Vector&);
 
     /* Methods */
+    // Empty
 
     /* Destructor */
     ~Vector();

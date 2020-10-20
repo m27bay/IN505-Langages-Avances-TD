@@ -42,7 +42,7 @@ CString::CString(const char* _str)
 
 CString::CString(const CString &other)
 {
-  this->str = new char[ (this->size = other.getSize()) + 1 ];
+  this->str = new char[ (this->size = other.size) + 1 ];
   strcpy(this->str, other.str);
 }
 /* End builders */
@@ -72,62 +72,79 @@ void CString::setStr(char* newStr)
 /* End setter */
 
 /* Overloaded */
-void CString::operator=(const CString &other)
+CString& CString::operator=(const CString &other)
 {
-  // delete[] this->str;
-  this->str = new char[ strlen( other.getStr() ) + 1 ];
-  strcpy( this->str, other.getStr() );
-  this->size = other.getSize();
+  // protect against invalid self-assignment
+  if( this != &other )
+  {
+    // 1: allocate new memory and copy the elements
+    char* newStr = new char[other.size + 1];
+    strcpy(newStr, other.str);
+
+    // 2: deallocate old memory
+    delete[] this->str;
+
+    // 3: assign the new memory to the object
+    this->str = newStr;
+    this->size = other.size;
+  }
+
+  // by convention, always return *this
+  return *this;
 }
 
-// CString& CString::operator=(const CString &other)
-// {
-//   // // protect against invalid self-assignment
-//   if( this != &other )
-//   {
-//     // 1: allocate new memory and copy the elements
-//     char* newStr = new char[other.size + 1];
-//     std::copy(other.str, other.str + other.size, newStr);
-
-//     // 2: deallocate old memory
-//     delete[] str;
-
-//     // 3: assign the new memory to the object
-//     str = newStr;
-//     size = other.size;
-//   }
-
-//   // by convention, always return *this
-//   return *this;
-// }
-
-CString CString::operator+(const CString &other)
+CString& CString::operator+(const CString &other)
 {
 
   // Alloc new memory
-  char* tmp = new char[(this->size += other.getSize()) + 1];
+  char* tmp = new char[(this->size += other.size) + 1];
 
   // Fill new string
   strcpy(tmp, this->str);
-  strcat(tmp, other.getStr());
-
-  // Create new String
-  CString Ctmp(tmp);
+  strcat(tmp, other.str);
 
   // Free
-  delete[] tmp;
+  delete[] this->str;
 
-  return Ctmp;
+  // assign
+  this->str = tmp;
+
+  return *this;
 }
 
 bool CString::operator>(const CString &other)
 {
-  return ( ( strcmp( this->str, other.getStr() ) > 0 ) && this->size > other.getSize() );
+  return ( ( strcmp(this->str, other.str) > 0 ) && this->size > other.size );
 }
 
 bool CString::operator<=(const CString &other)
 {
-  return ( ( strcmp( this->str, other.getStr() ) <= 0 ) && this->size <= other.getSize() );
+  return ( ( strcmp(this->str, other.str) <= 0 ) && this->size <= other.size );
+}
+
+std::ostream &operator<<(std::ostream &flux, const CString &other)
+{
+  for (int i = 0; i < other.size; ++i)
+  {
+    flux << other.str[i];
+  }
+
+  return flux;
+}
+
+std::istream &operator>>(std::istream &flux, CString &other)
+{
+  delete [] other.str;
+
+  std::string newStr;
+  std::cout << "New Str = ";
+  flux >> newStr;
+
+  other.size = newStr.length();
+  other.str = new char[other.size + 1];
+  strcpy(other.str, newStr.c_str());
+
+  return flux;
 }
 /* End overloaded */
 
@@ -136,7 +153,7 @@ void CString::print() const
 {
   if( size )
   {
-      std::cout << "String : " << str << ", size : " << size <<std::endl;
+      std::cout << "String : " << *this << ", size : " << size <<std::endl;
   }
   else
   {

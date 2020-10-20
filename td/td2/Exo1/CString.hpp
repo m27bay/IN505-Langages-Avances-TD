@@ -1,6 +1,8 @@
 #ifndef CString_HPP
 #define CString_HPP
 
+#include <iostream>
+
 class CString
 {
   private :
@@ -30,13 +32,15 @@ class CString
     void print() const;
 
     /* Overloaded */
-    void operator=(const CString&);
+    CString &operator=(const CString&);
 
-    CString operator+(const CString&);
+    CString &operator+(const CString&);
 
     bool operator>(const CString&);
     bool operator<=(const CString&);
 
+    friend std::ostream &operator<<(std::ostream &flux, const CString&);
+    friend std::istream &operator>>(std::istream &flux, CString&);
 
     /* Methods */
     CString cstradd(const char car);
