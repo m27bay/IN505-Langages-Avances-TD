@@ -40,13 +40,6 @@ Vector::Vector(int size)
 
 /* End builders */
 
-/* Setters */
-void Vector::setTab(int* newTab)
-{
-  this->tab = newTab;
-}
-/* End setters */
-
 /* Overloaded */
 Vector &Vector::operator=(const Vector &other)
 {
@@ -67,13 +60,13 @@ Vector &Vector::operator=(const Vector &other)
   return *this;
 }
 
-Vector Vector::operator+(const Vector &other)
+Vector &Vector::operator+=(const Vector &other)
 {
   if (this->size == other.size)
   {
     for (int i = 0; i < this->size; ++i)
     {
-      this->tab[i] =+ other.tab[i];
+      this->tab[i] += other.tab[i];
     }
   }
   else if (this->size < other.size)
@@ -104,13 +97,13 @@ Vector Vector::operator+(const Vector &other)
   return *this;
 }
 
-Vector Vector::operator-(const Vector &other)
+Vector &Vector::operator-=(const Vector &other)
 {
   if (this->size == other.size)
   {
     for (int i = 0; i < this->size; ++i)
     {
-      this->tab[i] =- other.tab[i];
+      this->tab[i] -= other.tab[i];
     }
   }
   else if (this->size < other.size)
@@ -139,6 +132,56 @@ Vector Vector::operator-(const Vector &other)
   }
 
   return *this;
+}
+
+bool Vector::operator<(const Vector &other)
+{
+  int minSize = ( this->size < other.size ) ? this->size : other.size;
+
+  for (int i = 0; i < minSize; ++i)
+  {
+    if (!(this->tab[i] < other.tab[i]))
+    {
+      return false;
+    }
+  }
+
+  return (this->size == other.size);
+}
+
+bool Vector::operator<=(const Vector &other)
+{
+  int minSize = ( this->size < other.size ) ? this->size : other.size;
+
+  for (int i = 0; i < minSize; ++i)
+  {
+    if (!(this->tab[i] <= other.tab[i]))
+    {
+      return false;
+    }
+  }
+  return (this->size == other.size);
+}
+
+bool Vector::operator>(const Vector &other)
+{
+  return !(*this > other);
+}
+
+bool Vector::operator>=(const Vector &other)
+{
+  return !(*this >= other);
+}
+
+int Vector::operator[](const int index)
+{
+  if (index > this->size)
+  {
+    std::cout << "Index out of bound" << std::endl;
+    return -1;
+  }
+
+  return this->tab[index];
 }
 
 std::ostream &operator<<(std::ostream &flux, const Vector &other)
@@ -178,17 +221,6 @@ std::istream &operator>>(std::istream &flux, Vector &other)
   }
 
   return flux;
-}
-
-int Vector::operator[](const int index)
-{
-  if (index > this->size)
-  {
-    std::cout << "Index out of bound" << std::endl;
-    return -1;
-  }
-
-  return this->tab[index];
 }
 
 /* End overloaded */

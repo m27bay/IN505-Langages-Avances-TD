@@ -18,14 +18,23 @@ int main(int argc, char const *argv[])
   std::cout << "v4\n" << v4 << std::endl;
   std::cout << "Assignment of v4\nv5\n" << v5 << std::endl;
 
-  Vector v6 = (v3 + v2);
-  std::cout << "Sum v3 + v2\nv6\n" << v6 << std::endl;
+  v3 += v2;
+  std::cout << "v3 += v2\n" << v3 << std::endl;
+
+  v4 += v5;
+  std::cout << "v4 += v5\n" << v4 << std::endl;
 
   int tab3[3] = { 10, 20, 30 };
   Vector v7(tab3, 3);
   std::cout << "v7\n" << v7 << std::endl;
-  Vector v8 = ( v4 + v7 );
-  std::cout << "Subtraction v4 - v7\nv8\n" << v8 << std::endl;
+  v7 -= v4;
+  std::cout << "v7 -= v4\n" << v7 << std::endl;
 
+  int tab4[3] = { 1, 2, 4 };
+  Vector v9(tab4, 3);
+  std::cout << "v9\n" << v9 << std::endl;
+  std::cout << "v9 < v4 ? " << (v9 < v4) << std::endl;
+
+  std::cout << "v7 >= v4 ? " << (v7 >= v4 ) << std::endl;
   return 0;
 }

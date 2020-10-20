@@ -26,6 +26,9 @@ exo1.oD : exo1.cpp
 	g++ -c -g -Wall exo1.cpp
 	mv exo1.o ../Obj
 
+gdb :
+	../../Exe/
+
 vg :
 	valgrind ./../Exe/exo1
 

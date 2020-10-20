@@ -21,13 +21,10 @@ class Vector
     // Empty
 
     /* Setter */
-    void setTab(int*);
+    // Empty
 
     /* Overloaded */
     Vector &operator=(const Vector&);
-
-    Vector operator+(const Vector&);
-    Vector operator-(const Vector&);
 
     Vector &operator+=(const Vector&);
     Vector &operator-=(const Vector&);
