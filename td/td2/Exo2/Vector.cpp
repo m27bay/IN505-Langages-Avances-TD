@@ -165,12 +165,12 @@ bool Vector::operator<=(const Vector &other)
 
 bool Vector::operator>(const Vector &other)
 {
-  return !(*this > other);
+  return !(*this < other);
 }
 
 bool Vector::operator>=(const Vector &other)
 {
-  return !(*this >= other);
+  return !(*this <= other);
 }
 
 int Vector::operator[](const int index)
