@@ -1,21 +1,19 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-class Vector
+class VectorTab
 {
   private :
-
     /* attributes */
     int* tab;
     int size;
 
   public :
-
     /* Builders */
-    Vector(); // Default
-    Vector(const Vector&); // Copy
-    Vector(int* tab, int size);
-    Vector(int size);
+    VectorTab(); // Default
+    VectorTab(const VectorTab&); // Copy
+    VectorTab(int* tab, int size);
+    VectorTab(int size);
 
     /* Getter */
     // Empty
@@ -24,26 +22,76 @@ class Vector
     // Empty
 
     /* Overloaded */
-    Vector &operator=(const Vector&);
+    VectorTab &operator=(const VectorTab&);
 
-    Vector &operator+=(const Vector&);
-    Vector &operator-=(const Vector&);
+    VectorTab &operator+=(const VectorTab&);
+    VectorTab &operator-=(const VectorTab&);
 
-    bool operator<(const Vector&);
-    bool operator<=(const Vector&);
-    bool operator>(const Vector&);
-    bool operator>=(const Vector&);
+    bool operator<(const VectorTab&);
+    bool operator<=(const VectorTab&);
+    bool operator>(const VectorTab&);
+    bool operator>=(const VectorTab&);
 
     int operator[](const int);
 
-    friend std::ostream &operator<<(std::ostream &flux, const Vector&);
-    friend std::istream &operator>>(std::istream &flux, Vector&);
+    friend std::ostream &operator<<(std::ostream &flux, const VectorTab&);
+    friend std::istream &operator>>(std::istream &flux, VectorTab&);
 
     /* Methods */
     // Empty
 
     /* Destructor */
-    ~Vector();
+    ~VectorTab();
+};
+
+class VectorList
+{
+  private :
+    /* attributes */
+    struct elem
+    {
+        int data;
+        elem* next;
+    };
+
+    elem* first;
+    elem* end;
+    int size;
+
+  public :
+    /* Builders */
+    VectorList(); // Default
+    VectorList(const VectorList&); // Copy
+    VectorList(int size);
+    VectorList(int* tab, int size);
+
+    /* Getter */
+    // Empty
+
+    /* Setter */
+    // Empty
+
+    /* Overloaded */
+    VectorList &operator=(const VectorList&);
+
+    VectorList &operator+=(const VectorList&);
+    VectorList &operator-=(const VectorList&);
+
+    bool operator<(const VectorList&);
+    bool operator<=(const VectorList&);
+    bool operator>(const VectorList&);
+    bool operator>=(const VectorList&);
+
+    int operator[](const int);
+
+    friend std::ostream &operator<<(std::ostream &flux, const VectorList&);
+    friend std::istream &operator>>(std::istream &flux, VectorList&);
+
+    /* Methods */
+    // Empty
+
+    /* Destructor */
+    ~VectorList();
 };
 
 #endif

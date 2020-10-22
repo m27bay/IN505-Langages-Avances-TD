@@ -2,65 +2,113 @@
 
 #include "Vector.hpp"
 
+/* ########## */
+/* VectorTab  */
+/* ########## */
+
 /* Builders */
-Vector::Vector()
+
+// Default
+VectorTab::VectorTab()
 {
-  tab = NULL;
-  size = 0;
+  this->tab = nullptr;
+  this->size = 0;
 }
 
-Vector::Vector(const Vector& other)
+// Copy
+VectorTab::VectorTab(const VectorTab& other)
 {
+  // Alloc
   this->tab = new int[ (this->size = other.size) ];
 
-  for (int i = 0; i < this->size; ++i)
+  // Alloc failed ?
+  if (!this->tab)
   {
-    this->tab[i] = other.tab[i];
+    this->tab = nullptr;
+    this->size = 0;
+  }
+  else
+  {
+    // Fill
+    for (int i = 0; i < this->size; ++i)
+    {
+      this->tab[i] = other.tab[i];
+    }
   }
 }
 
-Vector::Vector(int* tab, int size)
+VectorTab::VectorTab(int* tab, int size)
 {
+  // Alloc
   this->tab = new int[ (this->size = size) ];
 
-  for (int i = 0; i < this->size; ++i)
+  // Alloc failed ?
+  if (!this->tab)
   {
-    this->tab[i] = tab[i];
+    this->tab = nullptr;
+    this->size = 0;
+  }
+  else
+  {
+    // Fill
+    for (int i = 0; i < this->size; ++i)
+    {
+      this->tab[i] = tab[i];
+    }
   }
 }
 
-Vector::Vector(int size)
+VectorTab::VectorTab(int size)
 {
+  // Alloc
   this->tab = new int[ (this->size = size) ];
-  for (int i = 0; i < this->size; ++i)
+
+  // Alloc failed ?
+  if (!this->tab)
   {
-    this->tab[i] = 0;
+    this->tab = nullptr;
+    this->size = 0;
+  }
+  else
+  {
+    // Fill
+    for (int i = 0; i < this->size; ++i)
+    {
+      this->tab[i] = 0;
+    }
   }
 }
-
 /* End builders */
 
 /* Overloaded */
-Vector &Vector::operator=(const Vector &other)
+VectorTab &VectorTab::operator=(const VectorTab &other)
 {
+  // Protect var = var
   if( this != &other )
   {
+    // Alloc
     int* newTab = new int[this->size = other.size];
 
+    // Alloc Failed
+    while (!newTab)
+    {
+      newTab = new int[this->size];
+    }
+    // Fill
     for (int i = 0; i < this->size; ++i)
     {
       newTab[i] = this->tab[i];
     }
 
+    // Swap tab;
     delete[] tab;
-
     this->tab = newTab;
   }
 
   return *this;
 }
 
-Vector &Vector::operator+=(const Vector &other)
+VectorTab &VectorTab::operator+=(const VectorTab &other)
 {
   if (this->size == other.size)
   {
@@ -97,7 +145,7 @@ Vector &Vector::operator+=(const Vector &other)
   return *this;
 }
 
-Vector &Vector::operator-=(const Vector &other)
+VectorTab &VectorTab::operator-=(const VectorTab &other)
 {
   if (this->size == other.size)
   {
@@ -134,7 +182,7 @@ Vector &Vector::operator-=(const Vector &other)
   return *this;
 }
 
-bool Vector::operator<(const Vector &other)
+bool VectorTab::operator<(const VectorTab &other)
 {
   int minSize = ( this->size < other.size ) ? this->size : other.size;
 
@@ -149,7 +197,7 @@ bool Vector::operator<(const Vector &other)
   return (this->size == other.size);
 }
 
-bool Vector::operator<=(const Vector &other)
+bool VectorTab::operator<=(const VectorTab &other)
 {
   int minSize = ( this->size < other.size ) ? this->size : other.size;
 
@@ -163,17 +211,17 @@ bool Vector::operator<=(const Vector &other)
   return (this->size == other.size);
 }
 
-bool Vector::operator>(const Vector &other)
+bool VectorTab::operator>(const VectorTab &other)
 {
   return !(*this < other);
 }
 
-bool Vector::operator>=(const Vector &other)
+bool VectorTab::operator>=(const VectorTab &other)
 {
   return !(*this <= other);
 }
 
-int Vector::operator[](const int index)
+int VectorTab::operator[](const int index)
 {
   if (index > this->size)
   {
@@ -184,49 +232,214 @@ int Vector::operator[](const int index)
   return this->tab[index];
 }
 
-std::ostream &operator<<(std::ostream &flux, const Vector &other)
+std::ostream &operator<<(std::ostream &flux, const VectorTab &other)
 {
-  flux << "Vector : " << std::endl;
-
   flux << "{ ";
-  for (int i = 0; i < other.size - 1; ++i)
+  if (other.size)
   {
-    flux << other.tab[i] << ", ";
+    for (int i = 0; i < other.size - 1; ++i)
+    {
+      flux << other.tab[i] << ", ";
+    }
+    flux << other.tab[ other.size -1 ];
   }
-  flux << other.tab[ other.size -1 ];
-  flux << " }\n";
+  else
+  {
+    flux << "*empty*";
+  }
+  flux << " }";
 
   return flux;
 }
 
-std::istream &operator>>(std::istream &flux, Vector &other)
+std::istream &operator>>(std::istream &flux, VectorTab &other)
 {
   int* newTab;
-  delete [] other.tab;
+  delete[] other.tab;
 
   std::cout << "size = ? ";
   flux >> other.size;
-  newTab = new int[ other.size ];
-
-  for (int i = 0; i < other.size; ++i)
+  if (other.size)
   {
-    std::cout << "value of tab[" << i << "] = ? ";
-    flux >> newTab[i];
+    newTab = new int[ other.size ];
+    for (int i = 0; i < other.size; ++i)
+    {
+      std::cout << "value of tab[" << i << "] = ? ";
+      flux >> newTab[i];
+    }
+
+    other.tab = new int[ other.size ];
+    for (int i = 0; i < other.size; ++i)
+    {
+      other.tab[i] = newTab[i];
+    }
+
+    delete[] newTab;
   }
-
-  other.tab = new int[ other.size ];
-  for (int i = 0; i < other.size; ++i)
+  else
   {
-    other.tab[i] = newTab[i];
+    other.tab = nullptr;
   }
 
   return flux;
 }
-
 /* End overloaded */
 
 /* Destructor */
-Vector::~Vector()
+VectorTab::~VectorTab()
 {
   delete[] tab;
 }
+/* End destructor */
+
+/* ########## */
+/* VectorList */
+/* ########## */
+
+/* Builders */
+VectorList::VectorList()
+{
+  this->first = this->end = nullptr;
+  this->size = 0;
+}
+
+VectorList::VectorList(const VectorList& other)
+{
+  if (!other.first)
+  {
+    this->first = this->end = nullptr;
+    this->size = 0;
+  }
+  else
+  {
+    this->first = new VectorList::elem;
+    this->first->data = other.first->data;
+
+    this->end = new VectorList::elem;
+
+    VectorList::elem* currentThis = this->first;
+    VectorList::elem* currentOther = other.first->next;
+
+    while (currentOther)
+    {
+      currentThis->next = new VectorList::elem;
+      currentThis->next->data = currentOther->data;
+
+      currentOther = currentOther->next;
+      this->end = currentThis;
+      currentThis = currentThis->next;
+    }
+    currentThis = nullptr;
+
+    this->size = other.size;
+  }
+}
+
+VectorList::VectorList(int size)
+{
+  if (!size)
+  {
+    this->first = this->end = nullptr;
+    this->size = 0;
+
+    return;
+  }
+
+  this->first = new VectorList::elem;
+  this->first->data = 0;
+  VectorList::elem* current = this->first;
+
+  int sizeTmp = 1;
+  while (sizeTmp < size )
+  {
+    current->next = new VectorList::elem;
+    current->next->data = 0;
+
+    sizeTmp++;
+  }
+  current->next = nullptr;
+  this->end = current;
+}
+
+VectorList::VectorList(int* tab, int size)
+{
+  if (!tab)
+  {
+    this->first = this->end = nullptr;
+    this->size = 0;
+  }
+  else
+  {
+    this->first = new VectorList::elem;
+    this->first->data = tab[0];
+
+    this->end = new VectorList::elem;
+
+    VectorList::elem* currentThis = this->first;
+
+    int pos = 1;
+    while (pos < size)
+    {
+      currentThis->next = new VectorList::elem;
+      currentThis->next->data = tab[pos];
+
+      currentThis = currentThis->next;
+      this->end = currentThis;
+
+      pos++;
+    }
+    this->end = currentThis;
+    currentThis->next = nullptr;
+
+    this->size = size;
+  }
+}
+/* End builders */
+
+/* Overloaded */
+VectorList &VectorList::operator=(const VectorList& other)
+{
+    // Protect var = var
+  if( this != &other )
+  {
+    VectorList::elem* currentThis = this->first;
+    VectorList::elem* currentOther = other.first;
+
+    while (currentOther)
+    {
+      currentThis->data = currentOther->data;
+    }
+  }
+
+  return *this;
+}
+
+std::ostream &operator<<(std::ostream &flux, const VectorList& other)
+{
+  flux << "{ ";
+  if (other.size)
+  {
+    VectorList::elem* current = other.first;
+    while (current)
+    {
+      flux << current->data << ", ";
+      current = current->next;
+    }
+    flux << other.end->data;
+  }
+  else
+  {
+    flux << "*empty*";
+  }
+  flux << " }";
+
+  return flux;
+}
+/* End overloaded */
+
+/* Destructor */
+VectorList::~VectorList()
+{
+
+}
+/* End destructor */
