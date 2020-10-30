@@ -5,7 +5,7 @@
 
 class Definition
 {
-    friend class Dictionnaire;
+    friend class Dictionary;
 
     private :
         /* Attributes */

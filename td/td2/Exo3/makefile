@@ -1,8 +1,8 @@
 all : compile
 	./../Exe/exo3
 
-compile : exo3.o Definition.o CString.o Dictionnaire.o
-	g++ ../Obj/exo3.o ../Obj/Definition.o ../Obj/CString.o ../Obj/Dictionnaire.o -o ../Exe/exo3
+compile : exo3.o Definition.o CString.o Dictionary.o
+	g++ ../Obj/exo3.o ../Obj/Definition.o ../Obj/CString.o ../Obj/Dictionary.o -o ../Exe/exo3
 
 Definition.o : Definition.cpp Definition.hpp
 	g++ -c -Wall Definition.cpp
@@ -16,9 +16,9 @@ CString.o : CString.cpp CString.hpp
 	g++ -c -Wall CString.cpp
 	mv CString.o ../Obj
 
-Dictionnaire.o : Dictionnaire.cpp Dictionnaire.hpp
-	g++ -c -Wall Dictionnaire.cpp
-	mv Dictionnaire.o ../Obj
+Dictionary.o : Dictionary.cpp Dictionary.hpp
+	g++ -c -Wall Dictionary.cpp
+	mv Dictionary.o ../Obj
 
 
 vg :
@@ -34,3 +34,4 @@ clean :
 	rm ../Exe/exo3
 	rm ../Obj/exo3.o
 	rm ../Obj/Definition.o
+	rm ../Obj/Dictionary.o
