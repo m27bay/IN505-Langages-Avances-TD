@@ -24,7 +24,7 @@ debug : compileD
 compileD : exo2.oD Vector.oD
 	g++ -g ../Obj/exo2.o ../Obj/Vector.o -o ../Exe/exo2
 
-Vector.oD : Vector.cpp Vector.hpp
+Vector.oD : Vector.cpp Vector.hpp NodeInt.hpp
 	g++ -c -g -Wall Vector.cpp
 	mv Vector.o ../Obj
 

@@ -25,7 +25,7 @@ class VectorTab
     VectorTab &operator=(const VectorTab&);
 
     VectorTab &operator+=(const VectorTab&);
-    VectorTab &operator-=(const VectorTab&);
+    VectorTab &operator+=(int newData);
 
     bool operator<(const VectorTab&);
     bool operator<=(const VectorTab&);
@@ -44,19 +44,31 @@ class VectorTab
     ~VectorTab();
 };
 
+class NodeInt
+{
+    friend class VectorList;
+    private:
+
+    /* Attributes */
+    int data;
+    NodeInt* next;
+
+    /* Builders */
+    NodeInt(); // Default
+    NodeInt(int newData);
+
+    public:
+    /* getters */
+    int getData() const;
+    NodeInt* getNext() const;
+};
+
 class VectorList
 {
   private :
     /* attributes */
-    struct elem
-    {
-        int data;
-        elem* next;
-    };
-
-    elem* first;
-    elem* end;
     int size;
+    NodeInt* first;
 
   public :
     /* Builders */
@@ -64,12 +76,6 @@ class VectorList
     VectorList(const VectorList&); // Copy
     VectorList(int size);
     VectorList(int* tab, int size);
-
-    /* Getter */
-    // Empty
-
-    /* Setter */
-    // Empty
 
     /* Overloaded */
     VectorList &operator=(const VectorList&);
@@ -86,9 +92,6 @@ class VectorList
 
     friend std::ostream &operator<<(std::ostream &flux, const VectorList&);
     friend std::istream &operator>>(std::istream &flux, VectorList&);
-
-    /* Methods */
-    // Empty
 
     /* Destructor */
     ~VectorList();

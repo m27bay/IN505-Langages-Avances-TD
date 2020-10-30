@@ -297,117 +297,120 @@ VectorTab::~VectorTab()
 /* ########## */
 
 /* Builders */
-VectorList::VectorList()
-{
-  this->first = this->end = nullptr;
-  this->size = 0;
-}
+// Default
+VectorList::VectorList() : size(0), first(nullptr) {}
+NodeInt::NodeInt() : data(0), next(nullptr) {}
+//
 
+// Copy
 VectorList::VectorList(const VectorList& other)
 {
   if (!other.first)
   {
-    this->first = this->end = nullptr;
+    this->first = nullptr;
     this->size = 0;
   }
   else
   {
-    this->first = new VectorList::elem;
-    this->first->data = other.first->data;
+    this->first = new NodeInt(other.first->data);
+    this->size = other.size;
 
-    this->end = new VectorList::elem;
-
-    VectorList::elem* currentThis = this->first;
-    VectorList::elem* currentOther = other.first->next;
+    NodeInt* currentThis = this->first;
+    NodeInt* currentOther = other.first;
 
     while (currentOther)
     {
-      currentThis->next = new VectorList::elem;
-      currentThis->next->data = currentOther->data;
+      currentThis->next = new NodeInt(currentOther->data);
 
       currentOther = currentOther->next;
-      this->end = currentThis;
       currentThis = currentThis->next;
     }
-    currentThis = nullptr;
-
-    this->size = other.size;
   }
 }
+//
 
+// With data
+NodeInt::NodeInt(int newData)
+{
+  this->data = newData;
+  this->next = nullptr;
+}
+//
+
+//
 VectorList::VectorList(int size)
 {
   if (!size)
   {
-    this->first = this->end = nullptr;
+    this->first = nullptr;
     this->size = 0;
 
     return;
   }
 
-  this->first = new VectorList::elem;
-  this->first->data = 0;
-  VectorList::elem* current = this->first;
+  this->first = new NodeInt(0);
+  this->size = size;
+  NodeInt* current = this->first;
 
   int sizeTmp = 1;
   while (sizeTmp < size )
   {
-    current->next = new VectorList::elem;
-    current->next->data = 0;
-
+    current->next = new NodeInt(0);
     sizeTmp++;
   }
-  current->next = nullptr;
-  this->end = current;
 }
 
 VectorList::VectorList(int* tab, int size)
 {
   if (!tab)
   {
-    this->first = this->end = nullptr;
+    this->first = nullptr;
     this->size = 0;
   }
   else
   {
-    this->first = new VectorList::elem;
-    this->first->data = tab[0];
-
-    this->end = new VectorList::elem;
-
-    VectorList::elem* currentThis = this->first;
+    this->first = new NodeInt(tab[0]);
+    this->size = size;
+    NodeInt* currentThis = this->first;
 
     int pos = 1;
     while (pos < size)
     {
-      currentThis->next = new VectorList::elem;
-      currentThis->next->data = tab[pos];
-
+      currentThis->next = new NodeInt(tab[pos]);
       currentThis = currentThis->next;
-      this->end = currentThis;
 
       pos++;
     }
-    this->end = currentThis;
-    currentThis->next = nullptr;
-
-    this->size = size;
   }
 }
+//
 /* End builders */
 
 /* Overloaded */
 VectorList &VectorList::operator=(const VectorList& other)
 {
-    // Protect var = var
+  // Protect var = var
   if( this != &other )
   {
-    VectorList::elem* currentThis = this->first;
-    VectorList::elem* currentOther = other.first;
+    this->size = other.size;
 
+    // Create the first element
+    NodeInt* firstNodeInt = new NodeInt(other.first->data);
+    this->first = firstNodeInt;
+
+    // Creation current
+    NodeInt* currentThis = first;
+    NodeInt* currentOther = other.first->next;
+
+    // Ride in currentOther
     while (currentOther)
     {
-      currentThis->data = currentOther->data;
+      // Init next
+      currentThis->next = currentOther;
+
+      // Skip to the next
+      currentOther = currentOther->next;
+      currentThis = currentThis->next;
     }
   }
 
@@ -419,27 +422,53 @@ std::ostream &operator<<(std::ostream &flux, const VectorList& other)
   flux << "{ ";
   if (other.size)
   {
-    VectorList::elem* current = other.first;
-    while (current)
+    NodeInt* current = other.first;
+    while (current->getNext())
     {
-      flux << current->data << ", ";
-      current = current->next;
+      flux << current->getData() << ", ";
+      current = current->getNext();
     }
-    flux << other.end->data;
+    flux << current->getData();
   }
   else
   {
     flux << "*empty*";
   }
-  flux << " }";
+  flux << " }, size : " << other.size;
 
   return flux;
 }
 /* End overloaded */
 
+/* Getters */
+int NodeInt::getData() const
+{
+  return this->data;
+}
+
+NodeInt* NodeInt::getNext() const
+{
+  return this->next;
+}
+/* End getters */
+
 /* Destructor */
 VectorList::~VectorList()
 {
-
+  while (this->size)
+  {
+    if (!this->first)
+    {
+      std::cout << "ERROR : list empty" << std::endl;
+      return;
+    }
+    else
+    {
+      NodeInt* tmp = this->first;
+      this->first = this->first->next;
+      delete tmp;
+      this->size-=1;
+    }
+  }
 }
 /* End destructor */
