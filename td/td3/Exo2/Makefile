@@ -2,7 +2,7 @@ all : compile
 	./../Exe/exo2
 
 compile : exo2.o Forme.o
-	g++ ../Obj/exo2.o ../Obj/Forme.o-o ../Exe/exo2
+	g++ ../Obj/exo2.o ../Obj/Forme.o -o ../Exe/exo2
 
 exo2.o : exo2.cpp
 	g++ -c exo2.cpp

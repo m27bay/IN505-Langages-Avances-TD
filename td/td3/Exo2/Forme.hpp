@@ -20,6 +20,10 @@ class Point
 
     friend std::ostream& operator<<(std::ostream &flux, const Point&);
 
+    /* Getters */
+    double getX() const;
+    double getY() const;
+
     /* Destructor */
     ~Point();
 };
@@ -29,7 +33,7 @@ class Forme
 	protected :
 		/* Attributes */
 		Point* points;
-		int size;
+		int numPoints;
 
 	public :
 		/* Builders */
@@ -39,20 +43,20 @@ class Forme
 		virtual void move(const Forme&);
 
 		/* Destructor */
-		~Forme();
+		virtual ~Forme();
 };
 
-class Segment
+class Segment : public Forme
 {
   private :
     /* attributes */
-    Point P, P2;
+    float size;
 
   public :
     /* Builders */
   	Segment(); // Default
   	Segment(const Segment&); // Copy
-    Segment(int Px, int Py, int P2x, int P2y);
+    Segment(double Px, double Py, double P2x, double P2y);
     Segment(const Point &_P, const Point &_P2);
 
     /* Overloaded */
@@ -70,7 +74,7 @@ class Segment
     bool isOnTheDiagonal();
 
     /* Destructor */
-    ~Segment();
+    virtual ~Segment();
 };
 
 #endif

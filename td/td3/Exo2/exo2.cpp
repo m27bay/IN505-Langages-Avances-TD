@@ -1,7 +1,18 @@
-#include "Forme.cpp"
+#include "Forme.hpp"
 
 int main(int argc, char const *argv[])
 {
-  std::cout << "hello wordl" << std::endl;
+  Point A;
+  std::cout << "A : " << A << std::endl;
+
+  Point B(1, 2);
+  std::cout << "B : " << B << std::endl;
+
+  Point C(2, 1);
+  std::cout << "C : " << C << std::endl;
+
+  Forme* BC = new Segment(B, C);
+  std::cout << "BC : " << BC << std::endl;
+  delete BC;
   return 0;
 }
