@@ -1,37 +1,33 @@
-all : compile
-	./../Exe/exo3
+CC=g++
+CFLAGS=-W -Wall
+EXEC=Main
 
-compile : exo3.o Definition.o CString.o Dictionary.o
-	g++ ../Obj/exo3.o ../Obj/Definition.o ../Obj/CString.o ../Obj/Dictionary.o -o ../Exe/exo3
+all: $(EXEC)
 
-Definition.o : Definition.cpp Definition.hpp
-	g++ -c -Wall Definition.cpp
-	mv Definition.o ../Obj
+Main: Main.o CString.o Definition.o Dictionary.o
+	$(CC) $^ -o $@
 
-exo3.o : exo3.cpp
-	g++ -c -Wall exo3.cpp
-	mv exo3.o ../Obj
+Main.o: Main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-CString.o : CString.cpp CString.hpp
-	g++ -c -Wall CString.cpp
-	mv CString.o ../Obj
+CString.o: CString.cpp CString.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-Dictionary.o : Dictionary.cpp Dictionary.hpp
-	g++ -c -Wall Dictionary.cpp
-	mv Dictionary.o ../Obj
+Definition.o: Definition.cpp Definition.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
+Dictionary.o: Dictionary.cpp Dictionary.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg :
-	valgrind ./../Exe/exo3
+clean:
+	rm *.o
 
-vg2 :
-	valgrind --leak-check=full ./../Exe/exo3
+mrproper: clean
+	rm Main
 
-vg3 :
-	valgrind -v ./../Exe/exo3
+# For windows
+cleanWin:
+	del *.o
 
-clean :
-	rm ../Exe/exo3
-	rm ../Obj/exo3.o
-	rm ../Obj/Definition.o
-	rm ../Obj/Dictionary.o
+mrproperWin: cleanWin
+	del main.exe

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "CString.hpp"
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   std::cout << "########################" << std::endl;
   /* Init */

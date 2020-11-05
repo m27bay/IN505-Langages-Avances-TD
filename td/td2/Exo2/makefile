@@ -1,56 +1,27 @@
-all : compile
-	./../Exe/exo2
+CC=g++
+CFLAGS=-W -Wall
+EXEC=Main
 
-tab : compile
-	./../Exe/exo2 vectorTab
+all: $(EXEC)
 
-list : compile
-	./../Exe/exo2 vectorList
+Main: Main.o Vector.o
+	$(CC) $^ -o $@
 
-compile : exo2.o Vector.o
-	g++ ../Obj/exo2.o ../Obj/Vector.o -o ../Exe/exo2
+Main.o: Main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-Vector.o : Vector.cpp Vector.hpp
-	g++ -c -Wall Vector.cpp
-	mv Vector.o ../Obj
+Vector.o: Vector.cpp Vector.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-exo2.o : exo2.cpp
-	g++ -c -Wall exo2.cpp
-	mv exo2.o ../Obj
+clean:
+	rm *.o
 
-debug : compileD
-	./../Exe/exo2
+mrproper: clean
+	rm Main
 
-compileD : exo2.oD Vector.oD
-	g++ -g ../Obj/exo2.o ../Obj/Vector.o -o ../Exe/exo2
+# For windows
+cleanWin:
+	del *.o
 
-Vector.oD : Vector.cpp Vector.hpp NodeInt.hpp
-	g++ -c -g -Wall Vector.cpp
-	mv Vector.o ../Obj
-
-exo2.oD : exo2.cpp
-	g++ -c -g -Wall exo2.cpp
-	mv exo2.o ../Obj
-
-gdb :
-	gdb ./../Exe/exo2
-
-gdbList :
-	gdb ./../Exe/exo2 vectorList
-
-vg :
-	valgrind ./../Exe/exo2
-
-vgList :
-	valgrind ./../Exe/exo2 vectorList
-
-vg2 :
-	valgrind --leak-check=full ./../Exe/exo2
-
-vgList2 :
-	valgrind --leak-check=full ./../Exe/exo2 vectorList
-
-clean :
-	rm ../Exe/exo2
-	rm ../Obj/exo2.o
-	rm ../Obj/Vector.o
+mrproperWin: cleanWin
+	del main.exe

@@ -27,6 +27,8 @@ class VectorTab
     VectorTab &operator+=(const VectorTab&);
     VectorTab &operator+=(int newData);
 
+    VectorTab &operator-=(const VectorTab&);
+
     bool operator<(const VectorTab&);
     bool operator<=(const VectorTab&);
     bool operator>(const VectorTab&);

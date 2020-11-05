@@ -1,6 +1,6 @@
 #include "Dictionary.hpp"
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   Dictionary dico;
   std::cout << "dico : " << dico << std::endl;

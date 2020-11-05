@@ -84,9 +84,16 @@ int main(int argc, char const *argv[])
   {
     vectorList();
   }
+  else if (!strcmp(argv[1], "help"))
+  {
+    std::cout << "Arg : " << std::endl;
+    std::cout << "vectorTab : use vector with table" << std::endl;
+    std::cout << "vectorList : use vector with linked list" << std::endl;
+  }
+  
   else
   {
-    std::cout << "use : ./../Exe/exo2 [arg]" << std::endl;
+    std::cout << "use : ./Main [arg]" << std::endl;
   }
 
   return 0;
