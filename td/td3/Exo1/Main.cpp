@@ -1,6 +1,6 @@
 #include "PointColor.hpp"
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   Point P0;
   std::cout << "P0 : " << P0 << std::endl;
@@ -22,5 +22,6 @@ int main(int argc, char const *argv[])
 
   PointColor P7(4566.3, 753.4, "green");
   std::cout << "P7 : " << P7 << std::endl;
+  
   return 0;
 }

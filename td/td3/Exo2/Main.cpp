@@ -1,6 +1,6 @@
 #include "Forme.hpp"
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   Point A;
   std::cout << "A : " << A << std::endl;
@@ -14,5 +14,6 @@ int main(int argc, char const *argv[])
   Forme* BC = new Segment(B, C);
   std::cout << "BC : " << BC << std::endl;
   delete BC;
+
   return 0;
 }

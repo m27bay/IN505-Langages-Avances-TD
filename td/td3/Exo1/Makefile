@@ -1,32 +1,30 @@
-all : compile
-	./../Exe/exo1
+CC=g++
+CFLAGS=-W -Wall
+EXEC=Main
 
-compile : exo1.o Point.o PointColor.o
-	g++ ../Obj/exo1.o ../Obj/Point.o ../Obj/PointColor.o -o ../Exe/exo1
+all: $(EXEC)
 
-exo1.o : exo1.cpp
-	g++ -c exo1.cpp
-	mv exo1.o ../Obj
+Main: Main.o Point.o PointColor.o
+	$(CC) $^ -o $@
 
-Point.o : Point.cpp Point.hpp
-	g++ -c Point.cpp
-	mv Point.o ../Obj
+Main.o: Main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-PointColor.o : PointColor.cpp PointColor.hpp
-	g++ -c PointColor.cpp
-	mv PointColor.o ../Obj
+Point.o: Point.cpp Point.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg :
-	valgrind ./../Exe/exo1
+PointColor.o: PointColor.cpp PointColor.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg2 :
-	valgrind --leaks-check=full ./../Exe/exo1
+clean:
+	rm *.o
 
-vg3 :
-	valgrind -v ./../Exe/exo1
+mrproper: clean
+	rm Main
 
-clean :
-	rm ../Exe/exo1
-	rm ../Obj/exo1.o
-	rm ../Obj/Point.o
-	rm ../Obj/PointColor.o
+# For windows
+cleanWin:
+	del *.o
+
+mrproperWin: cleanWin
+	del main.exe

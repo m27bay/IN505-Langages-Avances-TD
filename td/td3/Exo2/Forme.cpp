@@ -7,7 +7,8 @@ Point::Point() : x(0), y(0) {}
 Segment::Segment()
 {
   this->points = new Point[ this->numPoints = 2 ];
-  this->points[0]; this->points[1];
+  this->points[0] = Point();
+  this->points[1] = Point();
   this->size = length();
 }
 Forme::Forme() : points(nullptr), numPoints(0) {}
@@ -41,16 +42,24 @@ Segment::Segment(const Point& P, const Point& P2)
 /* Overloaded */
 Point& Point::operator=(const Point& other)
 {
-  this->x = other.x;
-  this->y = other.y;
+  if(this!=&other)
+  {
+    this->x = other.x;
+    this->y = other.y;
+  }
+  return *this;
 }
 
 Segment& Segment::operator=(const Segment& other)
 {
-  delete this->points;
-  this->points = new Point[ this->numPoints = 2 ];
-  this->points[0] = other.points[0]; this->points[1] = other.points[1];
-  this->size = other.size;
+  if(this!=&other)
+  {
+    delete this->points;
+    this->points = new Point[ this->numPoints = 2 ];
+    this->points[0] = other.points[0]; this->points[1] = other.points[1];
+    this->size = other.size;
+  }
+  return *this;
 }
 
 std::ostream& operator<<(std::ostream &flux, const Point& other)

@@ -12,8 +12,12 @@ Point::Point(double Px, double Py) : x(Px), y(Py) {}
 /* Overloaded */
 Point& Point::operator=(const Point& other)
 {
-  this->x = other.x;
-  this->y = other.y;
+  if(this!=&other)
+  {
+    this->x = other.x;
+    this->y = other.y;
+  }
+  return *this;
 }
 
 std::ostream& operator<<(std::ostream &flux, const Point& other)

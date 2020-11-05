@@ -1,27 +1,30 @@
-all : compile
-	./../Exe/exo2
+CC=g++
+CFLAGS=-W -Wall
+EXEC=Main
 
-compile : exo2.o Forme.o
-	g++ ../Obj/exo2.o ../Obj/Forme.o -o ../Exe/exo2
+all: $(EXEC)
 
-exo2.o : exo2.cpp
-	g++ -c exo2.cpp
-	mv exo2.o ../Obj
+Main: Main.o Forme.o Point.o
+	$(CC) $^ -o $@
 
-Forme.o : Forme.cpp Forme.hpp
-	g++ -c Forme.cpp
-	mv Forme.o ../Obj
+Main.o: Main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg :
-	valgrind ./../Exe/exo2
+Forme.o: Forme.cpp Forme.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg2 :
-	valgrind --leaks-check=full ./../Exe/exo2
+Point.o: ../Exo1/Point.cpp ../Exo1/Point.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg3 :
-	valgrind -v ./../Exe/exo2
+clean:
+	rm *.o
 
-clean :
-	rm ../Exe/exo2
-	rm ../Obj/exo2.o
-	rm ../Obj/Forme.o
+mrproper: clean
+	rm Main
+
+# For windows
+cleanWin:
+	del *.o
+
+mrproperWin: cleanWin
+	del main.exe
