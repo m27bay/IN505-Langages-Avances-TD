@@ -57,7 +57,7 @@ void exo3()
   tabRead(tabInt);
 }
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   exo3();
 

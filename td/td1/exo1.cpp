@@ -68,7 +68,7 @@ void exo1()
   exo1Part2();
 }
 
-int main(int argc, char const *argv[])
+int main(void)
 {
   exo1();
   return 0;
