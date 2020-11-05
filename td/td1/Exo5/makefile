@@ -1,13 +1,13 @@
 CC=g++
 CFLAGS=-W -Wall
-EXEC=main
+EXEC=Main
 
 all: $(EXEC)
 
-main: main.o Segment.o Point.o
+Main: Main.o Segment.o Point.o
 	$(CC) $^ -o $@
 
-main.o: main.cpp
+Main.o: Main.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
 Point.o: ../Exo4/Point.cpp ../Exo4/Point.hpp
@@ -20,7 +20,7 @@ clean:
 	rm *.o
 
 mrproper: clean
-	rm main
+	rm Main
 
 # For windows
 cleanWin:

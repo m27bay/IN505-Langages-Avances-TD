@@ -1,24 +1,27 @@
-all : compile
-	./../Exe/exo1
+CC=g++
+CFLAGS=-W -Wall
+EXEC=Main
 
-compile : exo1.o CString.o
-	g++ ../Obj/exo1.o ../Obj/CString.o -o ../Exe/exo1
+all: $(EXEC)
 
-CString.o : CString.cpp CString.hpp
-	g++ -c -Wall CString.cpp
-	mv CString.o ../Obj
+Main: Main.o CString.o
+	$(CC) $^ -o $@
 
-exo1.o : exo1.cpp
-	g++ -c -Wall exo1.cpp
-	mv exo1.o ../Obj
+Main.o: Main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg :
-	valgrind ./../Exe/exo1
+CString.o: CString.cpp CString.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-vg2 :
-	valgrind --leak-check=full ./../Exe/exo1
+clean:
+	rm *.o
 
-clean :
-	rm ../Exe/exo1
-	rm ../Obj/exo1.o
-	rm ../Obj/CString.o
+mrproper: clean
+	rm Main
+
+# For windows
+cleanWin:
+	del *.o
+
+mrproperWin: cleanWin
+	del main.exe

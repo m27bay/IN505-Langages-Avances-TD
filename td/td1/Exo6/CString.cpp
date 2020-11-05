@@ -192,6 +192,6 @@ CString::~CString()
     delete[] str;
   }
   else
-    std::cout << "error : null str" << std::endl;
+    std::cout << "ERROR : null str" << std::endl;
 }
 /* End destructor */

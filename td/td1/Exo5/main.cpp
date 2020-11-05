@@ -12,7 +12,7 @@ int main(void)
 
   std::cout << ( S.isVertical() ? "true" : "false" ) << std::endl;
   std::cout << ( S.isHorizontal() ? "true" : "false" ) << std::endl;
-  std::cout << S.isOnTheDiagonal() << std::endl;
+  std::cout << ( S.isOnTheDiagonal() ? "true" : "false" ) << std::endl;
 
   return 0;
 }
