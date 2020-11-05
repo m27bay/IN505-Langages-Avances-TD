@@ -1,18 +1,30 @@
-all : compile
-	./../Exe/exo5
+CC=g++
+CFLAGS=-W -Wall
+EXEC=main
 
-compile : exo5.o Segment.o
-	g++ ../Obj/exo5.o ../Obj/Segment.o ../Obj/Point.o -o ../Exe/exo5
+all: $(EXEC)
 
-exo5.o : exo5.cpp
-	g++ -c exo5.cpp
-	mv exo5.o ../Obj
+main: main.o Segment.o Point.o
+	$(CC) $^ -o $@
 
-Segment.o : Segment.cpp Segment.hpp
-	g++ -c Segment.cpp
-	mv Segment.o ../Obj
+main.o: main.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-clean :
-	rm ../Exe/exo5
-	rm ../Obj/exo5.o
-	rm ../Obj/Segment.o
+Point.o: ../Exo4/Point.cpp ../Exo4/Point.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
+
+Segment.o: Segment.cpp Segment.hpp
+	$(CC) -c $(CFLAGS) $< -o $@
+
+clean:
+	rm *.o
+
+mrproper: clean
+	rm main
+
+# For windows
+cleanWin:
+	del *.o
+
+mrproperWin: cleanWin
+	del main.exe
