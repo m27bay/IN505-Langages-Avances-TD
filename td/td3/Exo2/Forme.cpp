@@ -133,6 +133,18 @@ Point Forme::getPointsIndex(int index) const
 }
 /* End getters */
 
+/* Setters */
+void Point::setX(double x)
+{
+  this->x = x;
+}
+
+void Point::setY(double y)
+{
+  this->y = y;
+}
+/* End setters */
+
 /* Methods */
 float Segment::length()
 {
@@ -163,9 +175,18 @@ bool Segment::isOnTheDiagonal()
   return (m == 1);
 }
 
-void Forme::move(const Forme& forme)
+void Forme::move(double dx, double dy)
 {
-  std::cout << "move Forme" << std::endl;
+  Point P;
+  for(int i = 0; i < this->numPoints; ++i)
+  {
+    P = this->points[i];
+
+    P.setX(P.getX() + dx);
+    P.setY(P.getY() + dy);
+
+    this->points[i] = P;
+  }
 }
 /* End methods */
 

@@ -14,5 +14,8 @@ int main(void)
   Segment BC(B, C);
   std::cout << "BC : " << BC << std::endl;
 
+  BC.move(4, 0);
+  std::cout << "BC : " << BC << std::endl;
+
   return 0;
 }

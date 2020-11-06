@@ -24,6 +24,10 @@ class Point
     double getX() const;
     double getY() const;
 
+    /* Setters */
+    void setX(double x);
+    void setY(double y);
+
     /* Destructor */
     ~Point();
 };
@@ -47,7 +51,7 @@ class Forme
     friend std::ostream &operator<<(std::ostream &flux, const Forme &);
 
     /* Methodes */
-		virtual void move(const Forme&);
+		virtual void move(double dx, double dy);
 
     /* Getters */
     int getNumPoint() const;
@@ -69,13 +73,22 @@ class Segment : public Forme
   	Segment(); // Default
   	Segment(const Segment&); // Copy
     Segment(double Px, double Py, double P2x, double P2y);
-    Segment(const Point &_P, const Point &_P2);
+    Segment(const Point &, const Point &);
 
     /* Methods */
     float length();
     bool isVertical();
     bool isHorizontal();
     bool isOnTheDiagonal();
+};
+
+class Rectangle : public Forme
+{
+  public:
+    /* Builders */
+    Rectangle();                // Default
+    Rectangle(const Rectangle &); // Copy
+    Rectangle(const Point&, const Point&, const Point&, const Point&);
 };
 
 #endif
