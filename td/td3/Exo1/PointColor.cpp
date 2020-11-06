@@ -6,9 +6,9 @@
 PointColor::PointColor() : P(), color("undefined") {}
 
 // Copy
-PointColor::PointColor(const PointColor& other)
+PointColor::PointColor(const PointColor& other) : Point()
 {
-  this->P = other.P; // With
+  this->P = other.P;
   this->color = other.color;
 }
 
