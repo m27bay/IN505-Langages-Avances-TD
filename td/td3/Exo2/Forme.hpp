@@ -86,7 +86,7 @@ class Rectangle : public Forme
 {
   public:
     /* Builders */
-    Rectangle();                // Default
+    Rectangle(); // Default
     Rectangle(const Rectangle &); // Copy
     Rectangle(const Point&, const Point&, const Point&, const Point&);
 };
