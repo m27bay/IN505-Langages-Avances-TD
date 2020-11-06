@@ -20,7 +20,7 @@ Forme::Forme(const Forme& F)
   this->points = new Point[ this->numPoints = F.numPoints ];
   for(int i = 0; i < this->numPoints; ++i)
   {
-    (F.points), numPoints(F.numPoints)
+    this->points[i] = F.points[i];
   }
 }
 Segment::Segment(const Segment& S) : Forme()
@@ -63,24 +63,16 @@ Point& Point::operator=(const Point& other)
   return *this;
 }
 
-Forme &Forme::operator=(const Forme &other)
-{
-  if (this != &other)
-  {
-    this->points = other.points;
-    this->numPoints = other.numPoints;
-  }
-  return *this;
-}
-
-Segment& Segment::operator=(const Segment& other)
+Forme& Forme::operator=(const Forme& other)
 {
   if(this!=&other)
   {
     delete this->points;
-    this->points = new Point[ this->numPoints = 2 ];
-    this->points[0] = other.points[0]; this->points[1] = other.points[1];
-    this->size = other.size;
+    this->points = new Point[this->numPoints = other.numPoints];
+    for (int i = 0; i < this->numPoints; ++i)
+    {
+      this->points[i] = other.points[i];
+    }
   }
   return *this;
 }
@@ -91,25 +83,15 @@ std::ostream& operator<<(std::ostream &flux, const Point& other)
   return flux;
 }
 
-std::ostream &operator<<(std::ostream &flux, const Forme &other)
+std::ostream& operator<<(std::ostream& flux, const Forme& other)
 {
   Point P;
-  for (int i = 0; i < other.numPoints; ++i)
+  for (int i = 0; i < other.getNumPoint() - 1; ++i)
   {
-    P = other.points[i];
+    P = other.getPointsIndex(i);
     flux << P << ", ";
   }
-  return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Segment& other)
-{
-  Point P;
-  for (int i = 0; i < other.numPoints; ++i)
-  {
-    P = other.points[i];
-    flux << P << ", ";
-  }
+  flux << other.getPointsIndex(other.getNumPoint() - 1);
   return flux;
 }
 /* End overloaded */
@@ -123,6 +105,31 @@ double Point::getX() const
 double Point::getY() const
 {
   return this->y;
+}
+
+int Forme::getNumPoint() const
+{
+  return this->numPoints;
+}
+
+Point* Forme::getPoints() const
+{
+  return this->points;
+}
+
+Point Forme::getPointsIndex(int index) const
+{
+  if(0 <= index && index < this->numPoints)
+  {
+    return this->points[index];
+  }
+  else
+  {
+    // std::cout << "ERROR : index '" << index << "' out of band" << std::endl;
+    std::cout << "ERROR : index out of band" << std::endl;
+    return Point();
+  }
+  
 }
 /* End getters */
 
@@ -156,19 +163,15 @@ bool Segment::isOnTheDiagonal()
   return (m == 1);
 }
 
-void Segment::move(const Forme& forme)
+void Forme::move(const Forme& forme)
 {
-  std::cout << "move segment" << std::endl;
+  std::cout << "move Forme" << std::endl;
 }
 /* End methods */
 
 /* Destructor */
 Point::~Point() {}
 Forme::~Forme()
-{
-  delete this->points;
-}
-Segment::~Segment()
 {
   delete this->points;
 }

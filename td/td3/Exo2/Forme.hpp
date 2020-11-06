@@ -42,12 +42,17 @@ class Forme
     Forme(Point* points, int numPoints);
 
     /* Overloaded */
-    Forme& operator=(const Forme&);
+    virtual Forme& operator=(const Forme&);
 
-    friend std::ostream &operator<<(std::ostream &flux, const Forme&);
+    friend std::ostream &operator<<(std::ostream &flux, const Forme &);
 
     /* Methodes */
-		virtual void move(const Forme&) ;
+		virtual void move(const Forme&);
+
+    /* Getters */
+    int getNumPoint() const;
+    Point* getPoints() const;
+    Point getPointsIndex(int index) const;
 
     /* Destructor */
     virtual ~Forme();
@@ -66,22 +71,11 @@ class Segment : public Forme
     Segment(double Px, double Py, double P2x, double P2y);
     Segment(const Point &_P, const Point &_P2);
 
-    /* Overloaded */
-    Segment& operator=(const Segment&);
-
-    friend std::ostream& operator<<(std::ostream& flux, const Segment&);
-
-    /* Override */
-    virtual void move(const Forme&);
-
     /* Methods */
     float length();
     bool isVertical();
     bool isHorizontal();
     bool isOnTheDiagonal();
-
-    /* Destructor */
-    virtual ~Segment();
 };
 
 #endif

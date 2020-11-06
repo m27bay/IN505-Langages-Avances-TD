@@ -1,8 +1,12 @@
 CC=g++
-CFLAGS=-W -Wall
+CFLAGS=-W -Wall -Wextra
 EXEC=Main
 
 all: $(EXEC)
+
+# For window
+runWin : 
+	./$(EXEC).exe
 
 Main: Main.o Forme.o
 	$(CC) $^ -o $@
