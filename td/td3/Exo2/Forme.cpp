@@ -15,8 +15,15 @@ Segment::Segment()
 
 // Copy
 Point::Point(const Point& P) : x(P.x), y(P.y) {}
-Forme::Forme(const Forme& F) : points(F.points), numPoints(F.numPoints) {}
-Segment::Segment(const Segment& S)
+Forme::Forme(const Forme& F)
+{
+  this->points = new Point[ this->numPoints = F.numPoints ];
+  for(int i = 0; i < this->numPoints; ++i)
+  {
+    (F.points), numPoints(F.numPoints)
+  }
+}
+Segment::Segment(const Segment& S) : Forme()
 {
   this->points = new Point[ (this->numPoints = 2) ];
   this->points[0] = S.points[0]; this->points[1] = S.points[1];
@@ -37,12 +44,12 @@ Segment::Segment(double Px, double Py, double P2x, double P2y)
   this->size = length();
 }
 
-/* Segment::Segment(const Point& P, const Point& P2)
+Segment::Segment(const Point& P, const Point& P2)
 {
   this->points = new Point[ (this->numPoints = 2) ];
   this->points[0] = P; this->points[1] = P2;
   this->size = length();
-} */
+}
 /* End builders */
 
 /* Overloaded */
