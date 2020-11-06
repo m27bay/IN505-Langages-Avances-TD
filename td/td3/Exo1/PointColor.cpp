@@ -28,8 +28,12 @@ PointColor::PointColor(Point& P, std::string color)
 /* Overloaded */
 PointColor& PointColor::operator=(const PointColor& other)
 {
-  this->P = P; // with Point::operator=()
-  this->color = color;
+  if(this != &other)
+  {
+    this->P = P; // with Point::operator=()
+    this->color = color;
+  }
+  return *this;
 }
 
 std::ostream& operator<<(std::ostream &flux, const PointColor& other)

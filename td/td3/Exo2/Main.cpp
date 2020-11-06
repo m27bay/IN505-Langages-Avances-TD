@@ -11,9 +11,8 @@ int main(void)
   Point C(2, 1);
   std::cout << "C : " << C << std::endl;
 
-  Forme* BC = new Segment(B, C);
+  Segment BC(B, C);
   std::cout << "BC : " << BC << std::endl;
-  delete BC;
 
   return 0;
 }

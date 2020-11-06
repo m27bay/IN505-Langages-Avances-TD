@@ -36,14 +36,21 @@ class Forme
 		int numPoints;
 
 	public :
-		/* Builders */
-		Forme(); // Default
+    /* Builder */
+    Forme(); // Default
+    Forme(const Forme&); // Copy
+    Forme(Point* points, int numPoints);
 
-		/* methodes */
-		virtual void move(const Forme&);
+    /* Overloaded */
+    Forme& operator=(const Forme&);
 
-		/* Destructor */
-		virtual ~Forme();
+    friend std::ostream &operator<<(std::ostream &flux, const Forme&);
+
+    /* Methodes */
+		virtual void move(const Forme&) ;
+
+    /* Destructor */
+    virtual ~Forme();
 };
 
 class Segment : public Forme
@@ -65,7 +72,7 @@ class Segment : public Forme
     friend std::ostream& operator<<(std::ostream& flux, const Segment&);
 
     /* Override */
-    virtual void move(const Segment&);
+    virtual void move(const Forme&);
 
     /* Methods */
     float length();
