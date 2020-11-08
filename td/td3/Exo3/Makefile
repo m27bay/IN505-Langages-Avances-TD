@@ -8,13 +8,13 @@ all: $(EXEC)
 runWin : 
 	./$(EXEC).exe
 
-Main: Main.o Forme.o
+Main: Main.o CList.o
 	$(CC) $^ -o $@
 
 Main.o: Main.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
-Forme.o: Forme.cpp Forme.hpp
+CList.o: CList.cpp CList.hpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:

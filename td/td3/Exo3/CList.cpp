@@ -4,6 +4,8 @@
 // Default
 Node::Node() : data(0), next(nullptr) {}
 CList::CList() : size(0), first(nullptr) {}
+CPile::CPile() : CList() {}
+CFile::CFile() : CList() {}
 
 // Copy
 CList::CList(const CList& other)
@@ -74,11 +76,39 @@ CList &CList::operator=(const CList &other)
   return *this;
 }
 
+void CList::operator<(int newData)
+{
+  Node *newNode = new Node(newData);
+  if (!newNode)
+  {
+    std::cout << "ERROR : alloc Node failed" << std::endl;
+    return;
+  }
+
+  if (!this->first)
+  {
+    this->first = newNode;
+    this->size = 1;
+  }
+  else
+  {
+    Node *current = this->first;
+
+    while (current->next)
+    {
+      current = current->next;
+    }
+
+    current->next = newNode;
+    this->size += 1;
+  }
+}
+
 std::ostream &operator<<(std::ostream &flux, const CList& other)
 {
   if (!other.getFirst())
   {
-    std::cout << "*empty*" << std::endl;
+    flux << "*empty*\n";
   }
   else
   {
@@ -87,10 +117,49 @@ std::ostream &operator<<(std::ostream &flux, const CList& other)
     std::cout << "{ ";
     while (current->getNext())
     {
-      std::cout << current->getData() << ", ";
+      flux << current->getData() << ", ";
       current = current->getNext();
     }
-    std::cout << current->getData() << " }, size : " << other.getSize() << std::endl;
+    flux << current->getData() << " }, size : " << other.getSize();
+  }
+  return flux;
+}
+
+void CFile::operator>(int ret)
+{
+  if (!this->first)
+  {
+    std::cout << "ERROR : list empty" << std::endl;
+    return;
+  }
+  else
+  {
+    Node *tmp = this->first;
+    this->first = this->first->next;
+    ret = tmp->data;
+    delete tmp;
+    this->size -= 1;
+  }
+}
+
+void CPile::operator>(int ret)
+{
+  if (!this->first)
+  {
+    std::cout << "ERROR : list empty" << std::endl;
+    return;
+  }
+  else
+  {
+    Node *current = this->first;
+    while (current)
+    {
+      current = current->next;
+    }
+    std::cout << "ret : " << ret;
+    ret = current->data;
+    delete current;
+    this->size -= 1;
   }
 }
 /* end overloaded */
@@ -118,9 +187,19 @@ Node *CList::getFirst() const
 /* End getters */
 
 /* Methodes */
-
+void CList::empty()
+{
+  while (this->size)
+  {
+    int tmp = 0;
+    *this > tmp;
+  }
+}
 /* End methodes */
 
 /* Destructors */
-
+CList::~CList()
+{
+  empty();
+}
 /* End destructors */

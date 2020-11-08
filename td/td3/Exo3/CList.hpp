@@ -6,6 +6,8 @@
 class Node
 {
 	friend class CList;
+	friend class CPile;
+	friend class CFile;
 
 	private:
 		/* Attributes */
@@ -30,7 +32,7 @@ class CList
 		Node *first;
 
 	public:
-	 /* Builder */
+	 	/* Builder */
 	 	CList(); // Default
 		CList(const CList&); // Copy
 		CList(int first);
@@ -38,17 +40,40 @@ class CList
 		/* Overloaded */
 		virtual CList &operator=(const CList&);
 
-		virtual void operator<(const Node);
-		virtual int operator>(int ret);
+		void operator<(int newData); // pop
+		virtual void operator>(int ret) = 0; // push
 
 		friend std::ostream &operator<<(std::ostream &flux, const CList&);
+
+		/* Methodes */
+		void empty();
 
 		/* Getters */
 		int getSize() const;
 		Node *getFirst() const;
 
 		/* Destructor */
-		virtual ~CList();
+		~CList();
+};
+
+class CPile : public CList
+{
+	public:
+		/* Builder */
+		CPile(); // Default
+
+		/* Overloaded */
+		virtual void operator>(int ret);
+};
+
+class CFile : public CList
+{
+	public:
+		/* Builder */
+		CFile(); // Default
+
+		/* Overloaded */
+		virtual void operator>(int ret);
 };
 
 #endif
