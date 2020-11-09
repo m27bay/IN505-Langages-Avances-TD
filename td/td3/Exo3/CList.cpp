@@ -108,7 +108,8 @@ std::ostream &operator<<(std::ostream &flux, const CList& other)
 {
   if (!other.getFirst())
   {
-    flux << "*empty*\n";
+    flux << "*empty*";
+    return flux;
   }
   else
   {
@@ -125,7 +126,7 @@ std::ostream &operator<<(std::ostream &flux, const CList& other)
   return flux;
 }
 
-void CFile::operator>(int ret)
+void CList::operator>(int* ret)
 {
   if (!this->first)
   {
@@ -136,29 +137,29 @@ void CFile::operator>(int ret)
   {
     Node *tmp = this->first;
     this->first = this->first->next;
-    ret = tmp->data;
+    *ret = tmp->data;
     delete tmp;
     this->size -= 1;
   }
 }
 
-void CPile::operator>(int ret)
+void CPile::operator>(int* ret)
 {
   if (!this->first)
   {
-    std::cout << "ERROR : list empty" << std::endl;
+    std::cout << "ERROR : pile empty" << std::endl;
     return;
   }
   else
   {
     Node *current = this->first;
-    while (current)
+    while (current->next->next)
     {
       current = current->next;
     }
-    std::cout << "ret : " << ret;
-    ret = current->data;
-    delete current;
+    *ret = current->next->data;
+    delete current->next;
+    current->next = nullptr;
     this->size -= 1;
   }
 }
@@ -192,7 +193,7 @@ void CList::empty()
   while (this->size)
   {
     int tmp = 0;
-    *this > tmp;
+    *this > &tmp;
   }
 }
 /* End methodes */

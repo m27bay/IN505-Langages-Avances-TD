@@ -41,7 +41,7 @@ class CList
 		virtual CList &operator=(const CList&);
 
 		void operator<(int newData); // pop
-		virtual void operator>(int ret) = 0; // push
+		virtual void operator>(int* ret); // push
 
 		friend std::ostream &operator<<(std::ostream &flux, const CList&);
 
@@ -63,7 +63,7 @@ class CPile : public CList
 		CPile(); // Default
 
 		/* Overloaded */
-		virtual void operator>(int ret);
+		virtual void operator>(int* ret);
 };
 
 class CFile : public CList
@@ -71,9 +71,6 @@ class CFile : public CList
 	public:
 		/* Builder */
 		CFile(); // Default
-
-		/* Overloaded */
-		virtual void operator>(int ret);
 };
 
 #endif
