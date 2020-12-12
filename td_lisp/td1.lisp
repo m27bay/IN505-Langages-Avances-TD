@@ -49,4 +49,14 @@
 (format t "(my_max 4 10) : ~A ~%" (my_max 4 10))
 
 ;; Exo4
-(defun )
+(defun is_sub_liste(x)
+    (if (not (null x))
+        (if (listp (car '(x)))
+            t
+            (is_sub_liste(cdr x))
+        )
+    )
+)
+
+(format t "(is_sub_liste '(1 '(1 2 3))) : ~A ~%" (is_sub_liste '(1 '(1 2 3))))
+(format t "(is_sub_liste '(1 1 2 3)) : ~A ~%" (is_sub_liste '(1 1 2 3)))
