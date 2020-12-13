@@ -1,15 +1,15 @@
 ;; Exo2
-(defun my_third(list)
-    (car (cdr (cdr list)))
+(defun my_third(liste)
+    (car (cdr (cdr liste)))
 )
 
 (format t "(my_third '(1 2 3 4)) : ~A ~%" (my_third '(1 2 3 4)))
 
 ;; Exo2 v2
-(defun my_thirdv2(list)
-    (if (null list)
+(defun my_thirdv2(liste)
+    (if (null liste)
         nil ;; then
-        (car (cdr (cdr list))) ;; else
+        (car (cdr (cdr liste))) ;; else
     )
 
 )
@@ -17,11 +17,10 @@
 (format t "(my_thirdv2 '(1 2 3 4)) : ~A ~%" (my_thirdv2 '(1 2 3 4)))
 
 ;; Exo2 v3
-(defun my_thirdv3(list)
-    (if (null list) nil
-        (if (listp list)
-            (car (cdr (cdr list))) ;; then
-            nil ;; else
+(defun my_thirdv3(liste)
+    (if (null liste) nil
+        (if (listp liste)
+            (car (cdr (cdr liste)))
         )
     )
 )
@@ -29,10 +28,9 @@
 (format t "(my_thirdv3 '(1 2 3 4)) : ~A ~%" (my_thirdv3 '(1 2 3 4)))
 
 ;; Exo2 v3 opti
-(defun my_thirdv3opti(list)
-    (if (or (not (null list)) (listp list))
-        (car (cdr (cdr list))) ;; then
-        nil ;; else
+(defun my_thirdv3opti(liste)
+    (if (or (not (null liste)) (listp liste))
+        (car (cdr (cdr liste)))
     )
 )
 
@@ -49,26 +47,26 @@
 (format t "(my_max 4 10) : ~A ~%" (my_max 4 10))
 
 ;; Exo4
-(defun is_sub_list(list)
-    (if (null list)
+(defun is_sub_liste(liste)
+    (if (null liste)
         nil
-        (or (listp (car list)) (is_sub_list(cdr list)))
+        (or (listp (car liste)) (is_sub_liste(cdr liste)))
     )
 )
 
-(format t "(is_sub_list '(1 '(1 2 3))) : ~A ~%" (is_sub_list '(1 '(1 2 3))))
-(format t "(is_sub_list '(1 1 2 3)) : ~A ~%" (is_sub_list '(1 1 2 3)))
+(format t "(is_sub_liste '(1 '(1 2 3))) : ~A ~%" (is_sub_liste '(1 '(1 2 3))))
+(format t "(is_sub_liste '(1 1 2 3)) : ~A ~%" (is_sub_liste '(1 1 2 3)))
 
 ;; Exo5
-(defun printPointIteratif(int)
-    (loop for i from 1 to int
+(defun printPointIteratif(nombrePoint)
+    (loop for i from 1 to nombrePoint
         do(format t "*" i)
     )
 )
 
 ;; Exo5
-(defun printPointIteratif(int)
-    (loop for i from 1 to int
+(defun printPointIteratif(nombrePoint)
+    (loop for i from 1 to nombrePoint
         do(format t "*")
     )
 )
@@ -78,9 +76,9 @@
 (format t "~%")
 
 ;; Exo5
-(defun printPointRec(int)
-    (if (not (= int 1))
-        (printPointRec (- int 1))
+(defun printPointRec(nombrePoint)
+    (if (not (= nombrePoint 1))
+        (printPointRec (- nombrePoint 1))
     )
     (format t "*")
 )
@@ -90,27 +88,27 @@
 (format t "~%")
 
 ;; Exo5
-;; (defun numAInList(list)
+;; (defun numAInliste(liste)
 ;;     (let (numA 0))
-;;     (loop for elt in list
+;;     (loop for elt in liste
 ;;         do(if (= elt 'a) (+ numA 1) )
 ;;     )
 ;; )
 
-;; (format t "(numAInList '(a b c d a)) ; ~A ~%" (numAInList '(a b c d a)))
+;; (format t "(numAInliste '(a b c d a)) ; ~A ~%" (numAInliste '(a b c d a)))
 
 ;; Exo5
-(defun numAInListRec(list)
-    (if (null list)
+(defun numAInlisteRec(liste)
+    (if (null liste)
         0
-        (if (eql (car list) 'a)
-            (+ 1 (numAInListRec (cdr list)))
-            (numAInListRec (cdr list))
+        (if (eql (car liste) 'a)
+            (+ 1 (numAInlisteRec (cdr liste)))
+            (numAInlisteRec (cdr liste))
         )
     )
 )
 
-(format t "(numAInListRec '(a b c d a)) : ~A ~%" (numAInListRec '(a b c d a)))
+(format t "(numAInlisteRec '(a b c d a)) : ~A ~%" (numAInlisteRec '(a b c d a)))
 
 ;; Exo6
 ;; Check if one elt is nil
@@ -141,6 +139,27 @@
 (format t "(mystere 'a '(a b c d)) : ~A ~%" (mystere 'a '(a b c d)))
 
 ;; Exo7
-;; (defun summit (list)
-
+;; (defun summit (listee)
+;;     (remove nil listee)
+;;     ;; (apply #' + listee)
 ;; )
+
+;; (format t "(summit '(a b nil c nil d)) : ~A ~%" (summit '(a b nil c nil d)))
+
+;; Exo7 v1
+(defun summit (liste)
+    (cond
+        ((null liste) 0)
+        ((listp (car liste)) (summit (car liste)))
+        ((not (null (car liste))) (+ 1 (summit (cdr liste))))
+    )
+)
+
+(format t "(summit '((1 nil) 2 ((nil) 3) nil 4)) : ~A ~%" (summit '((1 nil) 2 ((nil) 3) nil 4)))
+
+;; Exo7 correction theophile
+(defun summit2 (liste)
+    (apply #' + (remove nil liste))
+)
+
+(format t "(summit2 '(1 nil 2 nil 3 nil 4) : ~A ~%" (summit2 '(1 nil 2 nil 3 nil 4)))
