@@ -38,3 +38,11 @@
 
 ;; testApply
 (format t "(apply #'+ 1 2 '(3 4 5) = ~A ~%" (apply #'+ 1 2 '(3 4 5)))
+
+;; test7
+(defun test7 (liste)
+    (format t "(cdr ~A) : ~A ~%" liste(cdr liste))
+    (format t "(car ~A) : ~A ~%" liste (car liste))
+)
+
+(test7 '(1 2 3 4))
