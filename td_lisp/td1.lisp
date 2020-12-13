@@ -1,11 +1,16 @@
 ;; Exo2
+;; En utilisant car et cdr, ecrire une fonction qui renvoie le quatrieme
+;; element d une liste.
 (defun my_third(liste)
     (car (cdr (cdr liste)))
 )
 
+(format t "~%##### test my_third #####~%")
 (format t "(my_third '(1 2 3 4)) : ~A ~%" (my_third '(1 2 3 4)))
 
 ;; Exo2 v2
+;; En utilisant car et cdr, ecrire une fonction qui renvoie le quatrieme
+;; element d une liste.
 (defun my_thirdv2(liste)
     (if (null liste)
         nil ;; then
@@ -14,9 +19,12 @@
 
 )
 
+(format t "~%##### test my_thirdv2 #####~%")
 (format t "(my_thirdv2 '(1 2 3 4)) : ~A ~%" (my_thirdv2 '(1 2 3 4)))
 
 ;; Exo2 v3
+;; En utilisant car et cdr, ecrire une fonction qui renvoie le quatrieme
+;; element d une liste.
 (defun my_thirdv3(liste)
     (if (null liste) nil
         (if (listp liste)
@@ -25,18 +33,24 @@
     )
 )
 
+(format t "~%##### test my_thirdv3 #####~%")
 (format t "(my_thirdv3 '(1 2 3 4)) : ~A ~%" (my_thirdv3 '(1 2 3 4)))
 
 ;; Exo2 v3 opti
+;; En utilisant car et cdr, ecrire une fonction qui renvoie le quatrieme
+;; element d une liste.
 (defun my_thirdv3opti(liste)
     (if (or (not (null liste)) (listp liste))
         (car (cdr (cdr liste)))
     )
 )
 
+(format t "~%##### test my_thirdv3opti #####~%")
 (format t "(my_thirdv3opti '(1 2 3 4)) : ~A ~%" (my_thirdv3opti '(1 2 3 4)))
 
 ;; Exo3
+;; Ecrire une fonction qui prend deux arguments et renvoie le plus
+;; grand des deux.
 (defun my_max(a b)
     (if (> a b)
         a ;; then
@@ -44,9 +58,12 @@
     )
 )
 
+(format t "~%##### test my_max #####~%")
 (format t "(my_max 4 10) : ~A ~%" (my_max 4 10))
 
 ;; Exo4
+;; Ecrire une fonction qui prend une liste comme argument et renvoie
+;; vrai si l’un de ses elements est une liste.
 (defun is_sub_liste(liste)
     (if (null liste)
         nil
@@ -54,10 +71,13 @@
     )
 )
 
+(format t "~%##### test is_sub_liste #####~%")
 (format t "(is_sub_liste '(1 '(1 2 3))) : ~A ~%" (is_sub_liste '(1 '(1 2 3))))
 (format t "(is_sub_liste '(1 1 2 3)) : ~A ~%" (is_sub_liste '(1 1 2 3)))
 
 ;; Exo5
+;; Ecrire une version iterative puis recursive d’une fonction qui :
+;; (a) prend un entier positif et imprime autant de points.
 (defun printPointIteratif(nombrePoint)
     (loop for i from 1 to nombrePoint
         do(format t "*" i)
@@ -65,17 +85,22 @@
 )
 
 ;; Exo5
+;; Ecrire une version iterative puis recursive d’une fonction qui :
+;; (a) prend un entier positif et imprime autant de points.
 (defun printPointIteratif(nombrePoint)
     (loop for i from 1 to nombrePoint
         do(format t "*")
     )
 )
 
+(format t "~%##### test printPointIteratif #####~%")
 (format t "printPointIteratif 10 ")
 (printPointIteratif 10)
 (format t "~%")
 
 ;; Exo5
+;; Ecrire une version iterative puis recursive d’une fonction qui :
+;; (a) prend un entier positif et imprime autant de points.
 (defun printPointRec(nombrePoint)
     (if (not (= nombrePoint 1))
         (printPointRec (- nombrePoint 1))
@@ -83,11 +108,14 @@
     (format t "*")
 )
 
+(format t "~%##### test printPointRec #####~%")
 (format t "printPointRec 10 ")
 (printPointRec 10)
 (format t "~%")
 
 ;; Exo5
+;; (b) prend une liste et renvoie le nombre de fois le symbole ’a’ apparaˆıt
+;; dans cette liste.
 ;; (defun numAInliste(liste)
 ;;     (let (numA 0))
 ;;     (loop for elt in liste
@@ -95,9 +123,12 @@
 ;;     )
 ;; )
 
+;; (format t "~%##### test numAInliste #####~%")
 ;; (format t "(numAInliste '(a b c d a)) ; ~A ~%" (numAInliste '(a b c d a)))
 
 ;; Exo5
+;; (b) prend une liste et renvoie le nombre de fois le symbole ’a’ apparaˆıt
+;; dans cette liste.
 (defun numAInlisteRec(liste)
     (if (null liste)
         0
@@ -108,6 +139,7 @@
     )
 )
 
+(format t "~%##### test numAInlisteRec #####~%")
 (format t "(numAInlisteRec '(a b c d a)) : ~A ~%" (numAInlisteRec '(a b c d a)))
 
 ;; Exo6
