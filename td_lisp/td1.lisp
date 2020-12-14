@@ -176,9 +176,9 @@
 (format t "(mystere 'a '(a b c d)) : ~A ~%" (mystere 'a '(a b c d)))
 
 ;; Exo7
-;; (defun summit (listee)
-;;     (remove nil listee)
-;;     ;; (apply #' + listee)
+;; (defun summit (liste)
+;;     (remove nil liste)
+;;     ;; (apply #' + liste)
 ;; )
 
 ;; (format t "(summit '(a b nil c nil d)) : ~A ~%" (summit '(a b nil c nil d)))
@@ -187,12 +187,13 @@
 (defun summit (liste)
     (cond
         ((null liste) 0)
-        ((listp (car liste)) (summit (car liste)))
-        ((not (null (car liste))) (+ 1 (summit (cdr liste))))
+        ((null (car liste)) (+ 1 (summit (cdr liste))))
+        ((not (null (car liste)) )(+ 0 (summit (cdr liste))))
     )
 )
 
 (format t "~%##### test summit #####~%")
+(format t "(summit '(1 nil 2 nil 3 nil nil 4)) : ~A ~%" (summit '(1 nil 2 nil 3 nil nil 4)))
 (format t "(summit '((1 nil) 2 ((nil) 3) nil 4)) : ~A ~%" (summit '((1 nil) 2 ((nil) 3) nil 4)))
 
 ;; Exo7 correction theophile
