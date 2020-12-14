@@ -116,15 +116,18 @@
 ;; Exo5
 ;; (b) prend une liste et renvoie le nombre de fois le symbole ’a’ apparaˆıt
 ;; dans cette liste.
-;; (defun numAInliste(liste)
-;;     (let (numA 0))
-;;     (loop for elt in liste
-;;         do(if (= elt 'a) (+ numA 1) )
-;;     )
-;; )
+(defun numAInliste(liste)
+    (setf numA 0)
+    (loop for elt in liste
+        do(if (eql elt 'a) 
+            (setf numA (+ numA 1))
+        )
+    )
+    numA
+)
 
-;; (format t "~%##### test numAInliste #####~%")
-;; (format t "(numAInliste '(a b c d a)) ; ~A ~%" (numAInliste '(a b c d a)))
+(format t "~%##### test numAInliste #####~%")
+(format t "(numAInliste '(a b c d a)) : ~A ~%" (numAInliste '(a b c d a)))
 
 ;; Exo5
 ;; (b) prend une liste et renvoie le nombre de fois le symbole ’a’ apparaˆıt
@@ -154,6 +157,7 @@
     )
 )
 
+(format t "~%##### test enigme #####~%")
 (format t "(enigme '(a b c d nil)) : ~A ~%" (enigme '(a b c d nil)))
 
 ;; Exo6
@@ -168,6 +172,7 @@
     )
 )
 
+(format t "~%##### test mystere #####~%")
 (format t "(mystere 'a '(a b c d)) : ~A ~%" (mystere 'a '(a b c d)))
 
 ;; Exo7
@@ -187,6 +192,7 @@
     )
 )
 
+(format t "~%##### test summit #####~%")
 (format t "(summit '((1 nil) 2 ((nil) 3) nil 4)) : ~A ~%" (summit '((1 nil) 2 ((nil) 3) nil 4)))
 
 ;; Exo7 correction theophile
@@ -194,4 +200,5 @@
     (apply #' + (remove nil liste))
 )
 
+(format t "~%##### test summit2 #####~%")
 (format t "(summit2 '(1 nil 2 nil 3 nil 4) : ~A ~%" (summit2 '(1 nil 2 nil 3 nil 4)))
