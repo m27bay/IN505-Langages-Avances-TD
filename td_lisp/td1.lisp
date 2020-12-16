@@ -145,6 +145,20 @@
 (format t "~%##### test numAInlisteRec #####~%")
 (format t "(numAInlisteRec '(a b c d a)) : ~A ~%" (numAInlisteRec '(a b c d a)))
 
+;; Exo5
+(defun rep_symb (symb liste)
+    (cond
+        ((null liste) 0)
+        ((null (car liste)) 0)
+        ((eq symb (car liste)) (+ 1 (rep_symb symb (cdr liste))))
+        (t (+ 0 (rep_symb symb (cdr liste))))
+    )
+)
+
+(format t "~%##### test rep_symb #####~%")
+(format t "(rep_symb 'a '(a b c d a e)) : ~A ~%" (rep_symb 'a '(a b c d a e)))
+(format t "(rep_symb 'a '(a b c d a e a)) : ~A ~%" (rep_symb 'a '(a b c d a e a)))
+
 ;; Exo6
 ;; Check if one elt is nil
 (defun enigme(X)
