@@ -46,5 +46,3 @@
 (format t "(tailleListe2 '(1 ((2 3) 4)) : ~A ~%" (tailleListe2 '(1 ((2 3) 4))))
 (format t "(tailleListe2 '(1 (2 3)) : ~A ~%" (tailleListe2 '(1 (2 3))))
 (format t "(tailleListe2 '((2 3) 4) : ~A ~%" (tailleListe2 '((2 3) 4)))
-
-;; Retourner 
