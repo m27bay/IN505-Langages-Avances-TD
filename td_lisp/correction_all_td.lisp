@@ -100,11 +100,11 @@
 )
 	   
 (defun count_symb_iter (symb l res)
-    (cond
-        ((null l) res)
-        ((if (eq symb (car l)) (count_symb_iter symb (cdr l) (+ 1 res))))
-        (t (count_symb_iter symb (cdr l) (+ 0 res)))
-    )
+  (cond
+    ((null l) res)
+    ((if (eq symb (car l)) (count_symb_iter symb (cdr l) (+ 1 res))))
+    (t (count_symb_iter symb (cdr l) (+ 0 res)))
+  )
 )
 
 (defun count_iter (symb l)
